@@ -1,0 +1,129 @@
+{
+  ".svelte-kit/runtime/client/start.js": {
+    "file": "start-e4c7546a.js",
+    "src": ".svelte-kit/runtime/client/start.js",
+    "isEntry": true,
+    "imports": [
+      "_vendor-4946cc4b.js",
+      "_singletons-4a680913.js"
+    ],
+    "dynamicImports": [
+      "src/routes/__layout.svelte",
+      ".svelte-kit/runtime/components/error.svelte",
+      "src/routes/index.svelte",
+      "src/routes/search.svelte",
+      "src/routes/r/[subreddit]/index.svelte",
+      "src/routes/r/[subreddit]/[...post].svelte"
+    ]
+  },
+  "src/routes/__layout.svelte": {
+    "file": "pages/__layout.svelte-92f51867.js",
+    "src": "src/routes/__layout.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-4946cc4b.js",
+      "_stores-d9004b58.js",
+      "_singletons-4a680913.js",
+      "_index-e02fe488.js"
+    ],
+    "css": [
+      "assets/pages/__layout.svelte-c529dd9a.css"
+    ]
+  },
+  ".svelte-kit/runtime/components/error.svelte": {
+    "file": "error.svelte-9334f0e9.js",
+    "src": ".svelte-kit/runtime/components/error.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-4946cc4b.js"
+    ]
+  },
+  "src/routes/index.svelte": {
+    "file": "pages/index.svelte-d689e718.js",
+    "src": "src/routes/index.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-4946cc4b.js",
+      "_index-ec30affb.js",
+      "_index-e02fe488.js"
+    ],
+    "css": [
+      "assets/pages/index.svelte-c1da1e5e.css",
+      "assets/spinner.svelte_svelte_type_style_lang-7d24b7f7.css"
+    ]
+  },
+  "src/routes/search.svelte": {
+    "file": "pages/search.svelte-ba707c50.js",
+    "src": "src/routes/search.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-4946cc4b.js",
+      "_index-ec30affb.js",
+      "_index-e02fe488.js"
+    ]
+  },
+  "src/routes/r/[subreddit]/index.svelte": {
+    "file": "pages/r/_subreddit_/index.svelte-94829146.js",
+    "src": "src/routes/r/[subreddit]/index.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-4946cc4b.js",
+      "_stores-d9004b58.js",
+      "_index-ec30affb.js",
+      "_index-e02fe488.js"
+    ],
+    "css": [
+      "assets/pages/index.svelte-c1da1e5e.css",
+      "assets/spinner.svelte_svelte_type_style_lang-7d24b7f7.css"
+    ]
+  },
+  "src/routes/r/[subreddit]/[...post].svelte": {
+    "file": "pages/r/_subreddit_/_...post_.svelte-9846645c.js",
+    "src": "src/routes/r/[subreddit]/[...post].svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-4946cc4b.js",
+      "_stores-d9004b58.js",
+      "_index-ec30affb.js",
+      "_index-e02fe488.js"
+    ],
+    "css": [
+      "assets/pages/index.svelte-c1da1e5e.css",
+      "assets/spinner.svelte_svelte_type_style_lang-7d24b7f7.css"
+    ]
+  },
+  "_vendor-4946cc4b.js": {
+    "file": "chunks/vendor-4946cc4b.js",
+    "css": [
+      "assets/vendor-88f2bfd4.css"
+    ]
+  },
+  "_singletons-4a680913.js": {
+    "file": "chunks/singletons-4a680913.js"
+  },
+  "_stores-d9004b58.js": {
+    "file": "chunks/stores-d9004b58.js",
+    "imports": [
+      "_vendor-4946cc4b.js"
+    ]
+  },
+  "_index-e02fe488.js": {
+    "file": "chunks/index-e02fe488.js"
+  },
+  "_index-ec30affb.js": {
+    "file": "chunks/index-ec30affb.js",
+    "imports": [
+      "_vendor-4946cc4b.js",
+      "_index-e02fe488.js"
+    ],
+    "css": [
+      "assets/index-3a39db0e.css"
+    ]
+  }
+}
