@@ -1,6 +1,6 @@
 {
   ".svelte-kit/runtime/client/start.js": {
-    "file": "start-e4c7546a.js",
+    "file": "start-9ec65e8f.js",
     "src": ".svelte-kit/runtime/client/start.js",
     "isEntry": true,
     "imports": [
@@ -51,7 +51,7 @@
       "_index-e02fe488.js"
     ],
     "css": [
-      "assets/pages/index.svelte-c1da1e5e.css",
+      "assets/pages/r/_subreddit_/index.svelte-22d8ebee.css",
       "assets/spinner.svelte_svelte_type_style_lang-7d24b7f7.css"
     ]
   },
@@ -78,7 +78,7 @@
       "_index-e02fe488.js"
     ],
     "css": [
-      "assets/pages/index.svelte-c1da1e5e.css",
+      "assets/pages/r/_subreddit_/index.svelte-22d8ebee.css",
       "assets/spinner.svelte_svelte_type_style_lang-7d24b7f7.css"
     ]
   },
@@ -94,7 +94,7 @@
       "_index-e02fe488.js"
     ],
     "css": [
-      "assets/pages/index.svelte-c1da1e5e.css",
+      "assets/pages/r/_subreddit_/index.svelte-22d8ebee.css",
       "assets/spinner.svelte_svelte_type_style_lang-7d24b7f7.css"
     ]
   },
