@@ -1,7 +1,6 @@
 module.exports = {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
-	purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
-	darkMode: false, // or 'media' or 'class'
+	darkMode: 'media',
 	theme: {
 		spacing: {
 			0: '0px',
