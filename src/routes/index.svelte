@@ -1,6 +1,6 @@
 <script>
 	import VirtualList from '@sveltejs/svelte-virtual-list';
-	import Spinner from '../components/spinner.svelte';
+	// import Spinner from '../components/spinner.svelte';
 	import Post from '../components/post/index.svelte';
 	import { fetchPageData } from '../requests';
 	let items = [];
