@@ -3,11 +3,13 @@
 
 	import { inview } from 'svelte-inview';
 	import { Swiper, SwiperSlide } from 'swiper/svelte';
-	import { Autoplay, FreeMode } from 'swiper';
+	import { Autoplay, FreeMode, Pagination } from 'swiper';
 	import 'swiper/css';
+	import "swiper/css/pagination"
 
 	export let data;
 	let w;
+	let h;
 	let images = [];
 	const { media_metadata, title } = data;
 	let swiper;
@@ -29,31 +31,44 @@
 				height: s.y * scale
 			};
 		});
+		h = Math.min(...images.map((i) => i.height));
+		console.log(h);
 	}
 </script>
 
-<div use:inview on:change={handleInview}>
+<div bind:clientWidth={w} use:inview on:change={handleInview}>
 	<Swiper
-		modules={[Autoplay, FreeMode]}
-		freeMode={true}
+		modules={[Autoplay, Pagination]}
+		pagination={true}
 		spaceBetween={10}
-		speed={5000}
+		speed={1000}
 		loop={true}
 		autoplay={{
-			delay: 0,
 			disableOnInteraction: false
 		}}
 		on:swiper={e => swiper = e.detail[0]}
 	>
 		{#each images as { slug, width, height }}
 			<SwiperSlide>
-				<img src={slug} {width} {height} alt={title} />
+				<div style:height={h}>
+					<img src={slug} {width} {height} alt={title} />
+				</div>
 			</SwiperSlide>
 		{/each}
 	</Swiper>
 </div>
 
 <style>
+	:root {
+		--swiper-theme-color: theme('colors.primary');
+		--swiper-pagination-bullet-inactive-color: theme('colors.white');
+		--swiper-pagination-bullet-inactive-opacity: 1;
+	}
+	/* div {
+		display: flex;
+		align-items: center;
+		@apply overflow-hidden;
+	} */
 	img {
 		@apply rounded;
 	}

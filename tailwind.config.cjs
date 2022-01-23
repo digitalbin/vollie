@@ -64,6 +64,10 @@ module.exports = {
 			default: 'rgb(64 64 64 / 10%) 0px 0px 15px, rgb(64 64 64 / 5%) 0px 0px 3px 1px'
 		},
 		extend: {
+			colors: {
+				primary: '#74FF66',
+				white: '#fff',
+			},
 			maxHeight: {
 				post: '500px'
 			}

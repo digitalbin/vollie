@@ -1,4 +1,5 @@
 <script>
+	import { base } from '$app/paths';
     import { kFormatter } from '../../utils/index';
 	export let data;
 	const {
@@ -13,7 +14,7 @@
 
 {#if url}
 	<li>
-		<a href={url}>
+		<a href={base + url}>
             {#if iconUrl}
                 <img
                     alt={`Icon for ${display_name_prefixed}`}

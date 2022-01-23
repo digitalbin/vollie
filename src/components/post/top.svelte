@@ -1,4 +1,5 @@
 <script>
+    import { base } from '$app/paths';
     import he from 'he';
     import Avatar from '../avatar.svelte';
     import { timeSince } from '../../utils';
@@ -36,7 +37,7 @@
 </style>
 
 <div>
-    <a href={subredditLink}>
+    <a href={base + subredditLink}>
         <Avatar type="subreddit" name={subreddit} />
         <span class="sub-title">
             {rsubreddit}
@@ -46,6 +47,6 @@
         </span>
     </a>
 </div>
-<a href={permalink} class="title">
+<a href={base + permalink} class="title">
     <h3>{decodedTitle}</h3>
 </a>
