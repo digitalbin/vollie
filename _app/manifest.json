@@ -1,11 +1,12 @@
 {
   ".svelte-kit/runtime/client/start.js": {
-    "file": "start-f85b835b.js",
+    "file": "start-5b607833.js",
     "src": ".svelte-kit/runtime/client/start.js",
     "isEntry": true,
     "imports": [
-      "_vendor-4946cc4b.js",
-      "_singletons-a6a7384f.js"
+      "_vendor-cd4e58e1.js",
+      "_singletons-a6a7384f.js",
+      "_paths-4b3c6e7e.js"
     ],
     "dynamicImports": [
       "src/routes/__layout.svelte",
@@ -17,37 +18,39 @@
     ]
   },
   "src/routes/__layout.svelte": {
-    "file": "pages/__layout.svelte-d3362a62.js",
+    "file": "pages/__layout.svelte-d73a7957.js",
     "src": "src/routes/__layout.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-4946cc4b.js",
-      "_stores-d9004b58.js",
+      "_vendor-cd4e58e1.js",
+      "_stores-687d0d6d.js",
       "_singletons-a6a7384f.js",
+      "_paths-4b3c6e7e.js",
       "_index-e02fe488.js"
     ],
     "css": [
-      "assets/pages/__layout.svelte-0bea918e.css"
+      "assets/pages/__layout.svelte-9e5a4b7d.css"
     ]
   },
   ".svelte-kit/runtime/components/error.svelte": {
-    "file": "error.svelte-9334f0e9.js",
+    "file": "error.svelte-bd0d1758.js",
     "src": ".svelte-kit/runtime/components/error.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-4946cc4b.js"
+      "_vendor-cd4e58e1.js"
     ]
   },
   "src/routes/index.svelte": {
-    "file": "pages/index.svelte-76dedd29.js",
+    "file": "pages/index.svelte-0a59d2f3.js",
     "src": "src/routes/index.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-4946cc4b.js",
-      "_index-ec30affb.js",
+      "_vendor-cd4e58e1.js",
+      "_index-9ae2ffdc.js",
+      "_paths-4b3c6e7e.js",
       "_index-e02fe488.js"
     ],
     "css": [
@@ -55,50 +58,51 @@
     ]
   },
   "src/routes/search.svelte": {
-    "file": "pages/search.svelte-ba707c50.js",
+    "file": "pages/search.svelte-a37ba697.js",
     "src": "src/routes/search.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-4946cc4b.js",
-      "_index-ec30affb.js",
+      "_vendor-cd4e58e1.js",
+      "_index-9ae2ffdc.js",
+      "_paths-4b3c6e7e.js",
       "_index-e02fe488.js"
     ]
   },
   "src/routes/r/[subreddit]/index.svelte": {
-    "file": "pages/r/_subreddit_/index.svelte-94829146.js",
+    "file": "pages/r/_subreddit_/index.svelte-e1c73bbe.js",
     "src": "src/routes/r/[subreddit]/index.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-4946cc4b.js",
-      "_stores-d9004b58.js",
-      "_index-ec30affb.js",
+      "_vendor-cd4e58e1.js",
+      "_stores-687d0d6d.js",
+      "_index-9ae2ffdc.js",
+      "_paths-4b3c6e7e.js",
       "_index-e02fe488.js"
     ],
     "css": [
-      "assets/pages/index.svelte-c1da1e5e.css",
-      "assets/spinner.svelte_svelte_type_style_lang-7d24b7f7.css"
+      "assets/pages/r/_subreddit_/index.svelte-4e71ce72.css"
     ]
   },
   "src/routes/r/[subreddit]/[...post].svelte": {
-    "file": "pages/r/_subreddit_/_...post_.svelte-9846645c.js",
+    "file": "pages/r/_subreddit_/_...post_.svelte-400042bf.js",
     "src": "src/routes/r/[subreddit]/[...post].svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-4946cc4b.js",
-      "_stores-d9004b58.js",
-      "_index-ec30affb.js",
-      "_index-e02fe488.js"
+      "_vendor-cd4e58e1.js",
+      "_stores-687d0d6d.js",
+      "_index-9ae2ffdc.js",
+      "_index-e02fe488.js",
+      "_paths-4b3c6e7e.js"
     ],
     "css": [
-      "assets/pages/index.svelte-c1da1e5e.css",
-      "assets/spinner.svelte_svelte_type_style_lang-7d24b7f7.css"
+      "assets/pages/r/_subreddit_/_...post_.svelte-a209df06.css"
     ]
   },
-  "_vendor-4946cc4b.js": {
-    "file": "chunks/vendor-4946cc4b.js",
+  "_vendor-cd4e58e1.js": {
+    "file": "chunks/vendor-cd4e58e1.js",
     "css": [
       "assets/vendor-88f2bfd4.css"
     ]
@@ -106,23 +110,27 @@
   "_singletons-a6a7384f.js": {
     "file": "chunks/singletons-a6a7384f.js"
   },
-  "_stores-d9004b58.js": {
-    "file": "chunks/stores-d9004b58.js",
+  "_paths-4b3c6e7e.js": {
+    "file": "chunks/paths-4b3c6e7e.js"
+  },
+  "_stores-687d0d6d.js": {
+    "file": "chunks/stores-687d0d6d.js",
     "imports": [
-      "_vendor-4946cc4b.js"
+      "_vendor-cd4e58e1.js"
     ]
   },
   "_index-e02fe488.js": {
     "file": "chunks/index-e02fe488.js"
   },
-  "_index-ec30affb.js": {
-    "file": "chunks/index-ec30affb.js",
+  "_index-9ae2ffdc.js": {
+    "file": "chunks/index-9ae2ffdc.js",
     "imports": [
-      "_vendor-4946cc4b.js",
+      "_vendor-cd4e58e1.js",
+      "_paths-4b3c6e7e.js",
       "_index-e02fe488.js"
     ],
     "css": [
-      "assets/index-3a39db0e.css"
+      "assets/index-98086f94.css"
     ]
   }
 }
