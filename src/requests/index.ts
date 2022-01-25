@@ -18,7 +18,7 @@ export const getUserIcon = (username: string) =>
 
 export const fetchPageData = (slug = '', params: { [key: string]: string } = {}) => {
 	const url = new URL(slug, 'https://www.reddit.com');
-	Object.entries(params).forEach(([key, val]) => {
+	Object.entries(params).filter((e) => Boolean(e[1])).forEach(([key, val]) => {
 		url.searchParams.append(key, val);
 	});
 	url.pathname = url.pathname + '.json';
