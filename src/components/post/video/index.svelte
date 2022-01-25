@@ -42,8 +42,6 @@
 		})
 		.filter((source) => Boolean(source && source.src));
 
-	console.log(sources);
-
 	onMount(() => {
 		const scale = Math.min(MAX_HEIGHT / height, maxW / width);
 		w = width * scale;

@@ -16,14 +16,17 @@
 	$: if (items.length === 0 || end === items.length - 2) fetchPosts();
 </script>
 
-<VirtualList {items} let:item bind:end>
-	<section>
-		<Post data={item.data} />
-	</section>
+{#each items as { data }}
+	<Post {data} />
+{/each}
+<!-- <VirtualList {items} let:item bind:end> -->
+	<!-- <section> -->
+		<!-- <Post data={item.data} /> -->
+	<!-- </section> -->
 	<!-- {#if end === items.length}
 		<Spinner />
 	{/if} -->
-</VirtualList>
+<!-- </VirtualList> -->
 
 <style>
 	section {

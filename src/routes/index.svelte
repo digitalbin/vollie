@@ -1,35 +1,34 @@
 <script>
-	import { useQuery } from '@sveltestack/svelte-query';
-	import VirtualList from '@sveltejs/svelte-virtual-list';
+	import { useInfiniteQuery } from '@sveltestack/svelte-query';
 	import Spinner from '../components/spinner.svelte';
 	import Post from '../components/post/index.svelte';
 	import { fetchPageData } from '../requests';
-	let items = [];
-	let after = '';
-	let end;
-	const fetchPosts = () =>
-		fetchPageData('', { after }).then(({ data }) => {
-			items = [...items, ...data.children];
-			after = data.after;
-		});
 
-	const res = useQuery(after, fetchPosts, {
-		refetchOnMount: false
+	const fetchPosts = async ({ pageParam }) => {
+		const { data } = await fetchPageData('', { after: pageParam });
+		return data;
+	}
+
+	const res = useInfiniteQuery('posts', fetchPosts, {
+		getNextPageParam: prev => prev?.after,
+		initialData: { pages: [] },
 	});
 
-	console.log($res);
-	// $: if (items.length === 0 || end === items.length - 2) fetchPosts();
+	const handleInview = ({ detail: { inView } }) => {
+		if (inView) $res.fetchNextPage();
+	}
+
 </script>
 
-{#if $res.isLoading}
-	<Spinner />
-{:else}
-	<VirtualList {items} let:item bind:end>
+
+{#each $res?.data?.pages as { children, after } (after)}
+	{#each children as { data } (data.id)}
 		<section>
-			<Post data={item.data} />
+			<Post {data} />
 		</section>
-	</VirtualList>
-{/if}
+	{/each}
+{/each}
+<Spinner on:inview={handleInview} />
 
 <style>
 	section {

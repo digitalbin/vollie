@@ -24,20 +24,26 @@
 
 	const toggleMute = () => player.muted(!player.muted());
 
-    const handleScrub = (percent) => {
-        console.log(percent);
-        player.currentTime(player.duration() * percent);
+    const handleScrub = (e) => {
+        const percent = e.detail;
+        if (player.isReady_) player.currentTime(player.duration() * percent);
     }
 
 	$: {
         if (player) {
-            player.on('timeupdate', () => time = player.currentTime());
-            player.on('durationchange', () => duration = player.duration());
+            player.volume(1);
+            player.on('timeupdate', () => {
+                const _time = player.currentTime();
+                if (_time) time = _time;
+            });
+            player.on('durationchange', () => {
+                const _duration = player.duration();
+                if (_duration) duration = _duration;
+            });
             player.on('play', () => playing = true);
             player.on('pause', () => playing = false);
             player.on('volumechange', () => {
                 muted = player.muted()
-                console.log(player);
             });
         }
     };
@@ -53,7 +59,7 @@
             {/if}
 			<span>Toggle play</span>
 		</button>
-		<Scrubber _value={time / duration} onChangeEnd={handleScrub} />
+		<Scrubber progress={time / duration} on:changeend={handleScrub} />
 		<div class="time">
 			<time>{timeFormatter(time)}</time> /{' '}
 			<time>{timeFormatter(duration)}</time>

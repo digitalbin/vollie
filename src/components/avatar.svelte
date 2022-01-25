@@ -10,9 +10,13 @@
 		subreddit: getSubredditIcon
 	};
 
-	const res = useQuery(name, () => reqMap[type](name), {
-		refetchOnMount: false
+	const res = useQuery([name, type], () => reqMap[type](name), {
+		refetchOnMount: false,
+		cacheTime: Infinity,
+		staleTime: Infinity,
+		enabled: name !== '[deleted]',
 	});
+
 </script>
 
 <figure>

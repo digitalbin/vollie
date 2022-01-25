@@ -1,5 +1,6 @@
 <script>
     import { page } from '$app/stores';
+	import { pageTitle } from '../../../stores';
 	// import VirtualList from '@sveltejs/svelte-virtual-list';
 	// import Spinner from '../../../components/spinner.svelte';
 	import Post from '../../../components/post/index.svelte';
@@ -15,6 +16,10 @@
 		});
 
 	$: if (items.length === 0 || end === items.length - 2) fetchPosts();
+	$: {
+		const title = items?.[0]?.data?.title;
+		if (title) $pageTitle = title;
+	}
 </script>
 
 {#each items as item}

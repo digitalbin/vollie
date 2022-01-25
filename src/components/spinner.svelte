@@ -1,11 +1,19 @@
-<style>
-    div {
-        @apply flex justify-center p-90;
-    }
-    img {
-        @apply rounded-full;
-    }
-</style>
-<div>
-    <img src="/vollie.svg" alt="spinner" width={30} height={30} />
+<script>
+    import { createEventDispatcher } from 'svelte';
+    import { inview } from 'svelte-inview';
+    
+    const dispatch = createEventDispatcher();
+    
+</script>
+<div use:inview on:change={({ detail }) => dispatch('inview', detail)}>
+	<img src="/vollie.svg" alt="spinner" width={30} height={30} />
 </div>
+
+<style>
+	div {
+		@apply flex justify-center p-90;
+	}
+	img {
+		@apply rounded-full;
+	}
+</style>
