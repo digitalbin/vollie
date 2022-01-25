@@ -60,7 +60,6 @@
         border
         border-t-0
         z-50;
-        display: none;
 	}
 	input {
 		@apply bg-subtle

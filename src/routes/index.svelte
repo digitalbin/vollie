@@ -1,6 +1,7 @@
 <script>
+	import { useQuery } from '@sveltestack/svelte-query';
 	import VirtualList from '@sveltejs/svelte-virtual-list';
-	// import Spinner from '../components/spinner.svelte';
+	import Spinner from '../components/spinner.svelte';
 	import Post from '../components/post/index.svelte';
 	import { fetchPageData } from '../requests';
 	let items = [];
@@ -12,17 +13,23 @@
 			after = data.after;
 		});
 
-	$: if (items.length === 0 || end === items.length - 2) fetchPosts();
+	const res = useQuery(after, fetchPosts, {
+		refetchOnMount: false
+	});
+
+	console.log($res);
+	// $: if (items.length === 0 || end === items.length - 2) fetchPosts();
 </script>
 
-<VirtualList {items} let:item bind:end>
-	<section>
-		<Post data={item.data} />
-	</section>
-	<!-- {#if end === items.length}
-		<Spinner />
-	{/if} -->
-</VirtualList>
+{#if $res.isLoading}
+	<Spinner />
+{:else}
+	<VirtualList {items} let:item bind:end>
+		<section>
+			<Post data={item.data} />
+		</section>
+	</VirtualList>
+{/if}
 
 <style>
 	section {

@@ -23,11 +23,12 @@
 		yt_url: 'video/youtube'
 	};
 
+	const isYT = Boolean(media.oembed);
 	const { width, height, ...rest } = {
 		...media.reddit_video,
 		...media.reddit_video_preview,
 		...media.oembed,
-		...{ yt_url: url_overridden_by_dest }
+		...{ yt_url: isYT && url_overridden_by_dest }
 	};
 
 	const sources = Object.entries(rest)
@@ -39,7 +40,9 @@
 				};
 			}
 		})
-		.filter(Boolean);
+		.filter((source) => Boolean(source && source.src));
+
+	console.log(sources);
 
 	onMount(() => {
 		const scale = Math.min(MAX_HEIGHT / height, maxW / width);
@@ -53,7 +56,7 @@
 			techOrder: ['html5', 'youtube'],
 			muted: true,
 			preload: 'auto',
-			children: ['MediaLoader']
+			children: ['MediaLoader'],
 		});
 	});
 

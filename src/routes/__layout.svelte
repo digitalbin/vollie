@@ -1,11 +1,18 @@
 <script>
+	// import { page } from '$app/stores';
 	import { QueryClient, QueryClientProvider } from '@sveltestack/svelte-query';
 	import Header from '../components/header/index.svelte';
 	import '../app.css';
+	import { onMount } from 'svelte';
+
+	let postTitle;
+
 	const queryClient = new QueryClient();
-	const postTitle = null;
 	const title = `Vollie - ${postTitle || 'User ixperians'}`;
-	// console.log($$props);
+	// console.log($page);
+	// onMount(() => {
+	// 	postTitle = 
+	// })
 </script>
 
 <!-- <svelte:head>

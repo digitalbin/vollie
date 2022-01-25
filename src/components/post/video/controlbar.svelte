@@ -35,7 +35,10 @@
             player.on('durationchange', () => duration = player.duration());
             player.on('play', () => playing = true);
             player.on('pause', () => playing = false);
-            player.on('volumechange', () => muted = player.muted());
+            player.on('volumechange', () => {
+                muted = player.muted()
+                console.log(player);
+            });
         }
     };
 </script>
