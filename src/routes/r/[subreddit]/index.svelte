@@ -18,7 +18,6 @@
 	const handleInview = ({ detail: { inView } }) => {
 		if (inView) $res.fetchNextPage();
 	}
-
 </script>
 
 

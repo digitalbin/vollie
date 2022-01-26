@@ -5,11 +5,10 @@
 	import '../app.css';
 
 	const queryClient = new QueryClient();
+
 	let title;
-	
-	$: {
-		title = `Vollie - ${$pageTitle || 'User ixperians'}`;
-	}
+	$: title = `Vollie - ${$pageTitle || 'User ixperians'}`;
+
 </script>
 
 <svelte:head>
