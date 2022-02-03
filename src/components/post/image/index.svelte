@@ -2,10 +2,10 @@
     import Single from './single.svelte';
     import Gallery from './gallery.svelte';
     export let data;
-    const { media_metadata } = data;
+    const { is_gallery } = data;
 </script>
 
-{#if media_metadata}
+{#if is_gallery}
     <Gallery {data} />
 {:else}
     <Single {data} />

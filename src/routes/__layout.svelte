@@ -1,18 +1,34 @@
+<script context="module">
+	export async function load({ params, fetch }) {
+		const { path } = params;
+		const url = new URL(path, 'https://www.reddit.com');
+		url.pathname = `${url.pathname}.json`;
+		const data = await fetch(url.toString());
+		const json = await data.json();
+		let title = json?.[0]?.data?.children?.[0]?.data?.title;
+
+		return {
+			props: {
+				title,
+			},
+			stuff: json,
+		}
+	}
+</script>
+
 <script>
 	import { QueryClient, QueryClientProvider } from '@sveltestack/svelte-query';
-	import { pageTitle } from '../stores';
 	import Header from '../components/header/index.svelte';
 	import '../app.css';
-
 	const queryClient = new QueryClient();
 
-	let title;
-	$: title = `Vollie - ${$pageTitle || 'User ixperians'}`;
+	export let title;
+	$: pageTitle = `Vollie - ${title || 'User ixperians'}`;
 
 </script>
 
 <svelte:head>
-	<title>{title}</title>
+	<title>{pageTitle}</title>
 </svelte:head>
 <QueryClientProvider client={queryClient}>
 	<div>
