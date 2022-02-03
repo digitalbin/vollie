@@ -1,112 +1,76 @@
 {
   ".svelte-kit/runtime/client/start.js": {
-    "file": "start-915128b9.js",
+    "file": "start-d7a0c3e4.js",
     "src": ".svelte-kit/runtime/client/start.js",
     "isEntry": true,
     "imports": [
-      "_vendor-d5673dbd.js",
+      "_vendor-d3fe3e06.js",
+      "_preload-helper-a7b374f3.js",
       "_singletons-a6a7384f.js",
       "_paths-4b3c6e7e.js"
     ],
     "dynamicImports": [
       "src/routes/__layout.svelte",
       ".svelte-kit/runtime/components/error.svelte",
-      "src/routes/index.svelte",
       "src/routes/search.svelte",
-      "src/routes/r/[subreddit]/index.svelte",
-      "src/routes/r/[subreddit]/[...post].svelte"
+      "src/routes/[...path].svelte"
     ]
   },
   "src/routes/__layout.svelte": {
-    "file": "pages/__layout.svelte-41cef0fe.js",
+    "file": "pages/__layout.svelte-436f9fdf.js",
     "src": "src/routes/__layout.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-d5673dbd.js",
-      "_index-3bee4c2b.js",
-      "_stores-941d90f5.js",
+      "_vendor-d3fe3e06.js",
       "_singletons-a6a7384f.js",
       "_paths-4b3c6e7e.js",
-      "_index-e02fe488.js"
+      "_index-7cac6c3e.js"
     ],
     "css": [
-      "assets/pages/__layout.svelte-9436bcff.css"
+      "assets/pages/__layout.svelte-7f856d38.css"
     ]
   },
   ".svelte-kit/runtime/components/error.svelte": {
-    "file": "error.svelte-6beb1f22.js",
+    "file": "error.svelte-5061e326.js",
     "src": ".svelte-kit/runtime/components/error.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-d5673dbd.js"
-    ]
-  },
-  "src/routes/index.svelte": {
-    "file": "pages/index.svelte-db662c74.js",
-    "src": "src/routes/index.svelte",
-    "isEntry": true,
-    "isDynamicEntry": true,
-    "imports": [
-      "_vendor-d5673dbd.js",
-      "_spinner-1cdf0f01.js",
-      "_index-09a2344c.js",
-      "_paths-4b3c6e7e.js",
-      "_index-e02fe488.js"
-    ],
-    "css": [
-      "assets/pages/index.svelte-c1da1e5e.css"
+      "_vendor-d3fe3e06.js"
     ]
   },
   "src/routes/search.svelte": {
-    "file": "pages/search.svelte-a30b551e.js",
+    "file": "pages/search.svelte-6042d5f8.js",
     "src": "src/routes/search.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-d5673dbd.js",
-      "_index-09a2344c.js",
+      "_vendor-d3fe3e06.js",
+      "_index-cc646e0b.js",
       "_paths-4b3c6e7e.js",
-      "_index-e02fe488.js"
+      "_index-7cac6c3e.js",
+      "_preload-helper-a7b374f3.js"
     ]
   },
-  "src/routes/r/[subreddit]/index.svelte": {
-    "file": "pages/r/_subreddit_/index.svelte-a26bc000.js",
-    "src": "src/routes/r/[subreddit]/index.svelte",
+  "src/routes/[...path].svelte": {
+    "file": "pages/_...path_.svelte-08f0e180.js",
+    "src": "src/routes/[...path].svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-d5673dbd.js",
-      "_stores-941d90f5.js",
-      "_spinner-1cdf0f01.js",
-      "_index-09a2344c.js",
+      "_vendor-d3fe3e06.js",
       "_paths-4b3c6e7e.js",
-      "_index-e02fe488.js"
+      "_index-cc646e0b.js",
+      "_index-7cac6c3e.js",
+      "_preload-helper-a7b374f3.js"
     ],
     "css": [
-      "assets/pages/index.svelte-c1da1e5e.css"
+      "assets/pages/_...path_.svelte-c6ebca17.css"
     ]
   },
-  "src/routes/r/[subreddit]/[...post].svelte": {
-    "file": "pages/r/_subreddit_/_...post_.svelte-5ebd3a1d.js",
-    "src": "src/routes/r/[subreddit]/[...post].svelte",
-    "isEntry": true,
-    "isDynamicEntry": true,
-    "imports": [
-      "_vendor-d5673dbd.js",
-      "_stores-941d90f5.js",
-      "_index-3bee4c2b.js",
-      "_index-09a2344c.js",
-      "_index-e02fe488.js",
-      "_paths-4b3c6e7e.js"
-    ],
-    "css": [
-      "assets/pages/r/_subreddit_/_...post_.svelte-139ba794.css"
-    ]
-  },
-  "_vendor-d5673dbd.js": {
-    "file": "chunks/vendor-d5673dbd.js",
+  "_vendor-d3fe3e06.js": {
+    "file": "chunks/vendor-d3fe3e06.js",
     "css": [
       "assets/vendor-88f2bfd4.css"
     ]
@@ -117,40 +81,30 @@
   "_paths-4b3c6e7e.js": {
     "file": "chunks/paths-4b3c6e7e.js"
   },
-  "_index-3bee4c2b.js": {
-    "file": "chunks/index-3bee4c2b.js",
-    "imports": [
-      "_vendor-d5673dbd.js"
-    ]
+  "_preload-helper-a7b374f3.js": {
+    "file": "chunks/preload-helper-a7b374f3.js"
   },
-  "_stores-941d90f5.js": {
-    "file": "chunks/stores-941d90f5.js",
-    "imports": [
-      "_vendor-d5673dbd.js"
-    ]
+  "_index-7cac6c3e.js": {
+    "file": "chunks/index-7cac6c3e.js"
   },
-  "_index-e02fe488.js": {
-    "file": "chunks/index-e02fe488.js"
-  },
-  "_spinner-1cdf0f01.js": {
-    "file": "chunks/spinner-1cdf0f01.js",
+  "_index-cc646e0b.js": {
+    "file": "chunks/index-cc646e0b.js",
     "imports": [
-      "_vendor-d5673dbd.js",
-      "_paths-4b3c6e7e.js"
-    ],
-    "css": [
-      "assets/spinner-acbc3167.css"
-    ]
-  },
-  "_index-09a2344c.js": {
-    "file": "chunks/index-09a2344c.js",
-    "imports": [
-      "_vendor-d5673dbd.js",
+      "_vendor-d3fe3e06.js",
       "_paths-4b3c6e7e.js",
-      "_index-e02fe488.js"
+      "_index-7cac6c3e.js",
+      "_preload-helper-a7b374f3.js"
+    ],
+    "dynamicImports": [
+      "node_modules/@vime/core/dist/custom-elements/index.js"
     ],
     "css": [
-      "assets/index-0fcb2658.css"
+      "assets/index-b8060291.css"
     ]
+  },
+  "node_modules/@vime/core/dist/custom-elements/index.js": {
+    "file": "chunks/index-bcfbc7b0.js",
+    "src": "node_modules/@vime/core/dist/custom-elements/index.js",
+    "isDynamicEntry": true
   }
 }
