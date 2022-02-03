@@ -1,48 +1,35 @@
 <script>
-	// import {
-	// 	Player,
-	// 	Ui,
-	// 	Controls,
-	// 	PlaybackControl,
-	// 	ScrubberControl,
-	// 	TimeProgress,
-	// 	FullscreenControl,
-	// 	MuteControl,
-	// 	ClickToPlay,
-	// 	IconLibrary,
-	// 	Hls,
-	// 	Youtube,
-	// 	usePlayerStore
-	// } from '@vime/core';
-	// import '@vime/core/dist/index.js';
-	import '@vime/core/themes/default.css';
 	import { base } from '$app/paths';
 	import { inview } from 'svelte-inview';
-import { onMount } from 'svelte';
-import { defineCustomElements } from '@vime/core';
+	import { onMount } from 'svelte';
 
 	export let data;
 	const {
 		media,
 		url_overridden_by_dest,
-		// preview,
+		preview,
 		// secure_media_embed,
 	} = data;
 
+	let MAX_W;
+	let MAX_H = 500;
+	let size = [0, 0];
+
 	let player;
 	let isInView = false;
+	let ready = false;
 	let mounted = false;
-	// const { paused } = usePlayerStore(() => player);
 
-	const hlsUrl = media?.reddit_video?.hls_url;
+	const hlsUrl = media?.reddit_video?.hls_url || preview?.reddit_video_preview?.hls_url;
+	const { width, height } = media?.reddit_video || media?.oembed || {};
 
 	const isYT = Boolean(media.oembed);
 	const ytUrl = new URL(url_overridden_by_dest);
 	const ytId = ytUrl.searchParams.get('v') || ytUrl.pathname.replace('/', '');
 
-	const onInView = ({ detail }) => {
-		isInView = detail.inView;
-	};
+	const onInView = ({ detail }) => { isInView = detail.inView };
+
+	const handleReady = () => { ready = true }
 
 	onMount(async () => {
 		const { defineCustomElements } = await import ('@vime/core');
@@ -50,62 +37,54 @@ import { defineCustomElements } from '@vime/core';
 		mounted = true;
 	});
 
-	// $: {
-	// 	if (isInView) {
-	// 		$paused = false;
-	// 	} else {
-	// 		$paused = true;
-	// 	}
-	// }
+	$: {
+		if (ready && isInView) player.play();
+		else player?.pause();
+	}
 
+	$: {
+		const scale = Math.min(MAX_H / height, MAX_W / width);
+		size = [width * scale, height * scale].map(Math.round);
+	}
 </script>
 
+<div use:inview={{ threshold: .9 }} bind:clientWidth={MAX_W} on:change={onInView}>
 {#if mounted}
-<div use:inview={{ threshold: 0.5 }} on:change={onInView}>
-	<vm-player
-		bind:this={player}
-		muted
-		playsinline
-		loop
-	>
-		<vm-hls>
-			<source data-src={hlsUrl} type="application/x-mpegURL" />
-		</vm-hls>
-		<!-- {#if hlsUrl}
-			<Hls version="latest">
-				<source data-src={hlsUrl} type="application/x-mpegURL" />
-			</Hls>
-		{/if}
-		{#if isYT && ytId}
-				<Youtube videoId={ytId} />
-		{/if}
-		<Ui>
-			<IconLibrary name="micke" resolver={(iconName) => `${base}/icons/${iconName}.svg`} />
-			<ClickToPlay />
-			<Controls>
-				<PlaybackControl hideTooltip icons="micke" />
-				<ScrubberControl hideTooltip />
-				<TimeProgress />
-				<FullscreenControl hideTooltip icons="micke" />
-				<MuteControl hideTooltip icons="micke" />
-			</Controls>
-		</Ui> -->
-		<vm-ui>
-			<vm-icon-library name="micke" resolver={(iconName) => `${base}/icons/${iconName}.svg`}></vm-icon-library>
-			<vm-click-to-play></vm-click-to-play>
-			<vm-controls icons="micke">
-				<vm-playback-control icons="micke" hide-tooltip></vm-playback-control>
-				<vm-scrubber-control hide-tooltip></vm-scrubber-control>
-				<vm-time-progress></vm-time-progress>
-				<vm-fullscreen-control hide-tooltip icons="micke"></vm-fullscreen-control>
-				<vm-mute-control hide-tooltip icons="micke"></vm-mute-control>
-			</vm-controls>
-		</vm-ui>
-	</vm-player>
-</div>
+	<div class="player" style="width: {size[0]}px; height: {size[1]}px">
+		<vm-player
+			bind:this={player}
+			on:vmPlaybackReady={handleReady}
+			muted
+			playsinline
+			loop
+			aspect-ratio={size.join(':')}
+		>
+			{#if hlsUrl}
+				<vm-hls>
+					<source data-src={hlsUrl} type="application/x-mpegURL" />
+				</vm-hls>
+			{:else if isYT && ytId}
+					<vm-youtube video-id={ytId} />
+			{/if}
+
+			<vm-ui>
+				<vm-icon-library name="micke" resolver={(iconName) => `${base}/icons/${iconName}.svg`}></vm-icon-library>
+				<vm-click-to-play></vm-click-to-play>
+				<vm-controls>
+					<vm-playback-control icons="micke" hide-tooltip></vm-playback-control>
+					<vm-scrubber-control hide-tooltip></vm-scrubber-control>
+					<vm-time-progress></vm-time-progress>
+					<vm-fullscreen-control hide-tooltip icons="micke"></vm-fullscreen-control>
+					<vm-mute-control hide-tooltip icons="micke"></vm-mute-control>
+				</vm-controls>
+			</vm-ui>
+		</vm-player>
+	</div>
 {/if}
+</div>
 
 <style>
+	@import url('@vime/core/themes/default.css');
 	:global(vm-player) {
 		--vm-slider-value-color: theme('colors.primary');
 		--vm-control-icon-size: 15px;
@@ -116,14 +95,12 @@ import { defineCustomElements } from '@vime/core';
 		--vm-scrubber-buffered-bg: rgba(255, 255, 255, 0.25);
 		--vm-controls-bg: rgba(17, 17, 17, .8);
 		--vm-controls-border-radius: theme('borderRadius.px') theme('borderRadius.px') theme('borderRadius.sm') theme('borderRadius.sm');
-		/* --vm-controls-padding: 0; */
+    	--vm-control-focus-bg: none;
+    	--vm-control-focus-color: none;
+    	--vm-control-scale: sdgfadg;
+		--vm-controls-padding: 5px;
 		font-size: 12px;
-		/* height: 100%; */
 	}
-	:global(span.separator) {
-		font-size: var(--vm-time-font-size);
-	}
-
 	:global(vm-controls) {
 		@apply
 			left-xs
@@ -133,18 +110,7 @@ import { defineCustomElements } from '@vime/core';
 			w-auto;
 			height: 38px;
 	}
-	
-	:global(vm-controls div.controls) {
-		@apply
-			p-0;
-	}
-
-	:global(vm-player[video]) {
-		height: 600px;
-	}
-
-	div {
-		@apply rounded overflow-hidden;
-		/* height: 400px; */
+	div.player {
+		@apply rounded overflow-hidden bg-subtle mx-auto;
 	}
 </style>

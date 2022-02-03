@@ -41,8 +41,6 @@
     "he": "^1.2.0",
     "just-debounce-it": "^3.0.1",
     "svelte-inview": "^2.1.1",
-    "swiper": "^8.0.2",
-    "video.js": "^7.17.0",
-    "videojs-youtube": "^2.6.1"
+    "swiper": "^8.0.2"
   }
 }

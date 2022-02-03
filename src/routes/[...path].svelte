@@ -49,6 +49,7 @@
 		</section>
 	{/each}
 {/each}
+
 <div>
 	{#each comments as { data } (data.id)}
 		<ul>
