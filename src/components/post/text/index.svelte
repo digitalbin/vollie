@@ -19,7 +19,8 @@
         -mt-sm
         overflow-hidden
         relative
-        text-subtle;
+        text-subtle
+		cursor-pointer;
 	}
 
 	div:before {

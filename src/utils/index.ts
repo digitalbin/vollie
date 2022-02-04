@@ -24,3 +24,14 @@ export function kFormatter(num = 0): string {
 export function timeFormatter(seconds: number): string {
   return new Date(seconds * 1000).toISOString().substr(14, 5);
 }
+
+export function parseQuerystring(str: string): { [key: string]: string } {
+  const queryObj = str.split('&').filter(Boolean).reduce((acc, q) => {
+      const [key, val] = q.split('=');
+      return {
+          ...acc,
+          [key]: val,
+      }
+  }, {});
+  return queryObj;
+}

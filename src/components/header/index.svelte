@@ -1,11 +1,11 @@
 <script>
     import debounce from "just-debounce-it";
-	import { page } from '$app/stores';
-    import { goto } from '$app/navigation';
-	import ListItem from './listItem.svelte';
-	const { subreddit = 'popular' } = $page.params;
-    const isSearch = $page.url.pathname === '/search';
-	let headerTitle = isSearch ? 'search' : `r/${subreddit}`;
+    import { location, push, link, params } from 'svelte-spa-router';
+	import ListItem from './ListItem.svelte';
+
+	$: subreddit = $params?.subreddit || 'popular';
+	$: headerTitle = $location === '/search' ? 'search' : `r/${subreddit}`;
+
     let query = '';
 	let results = [];
 
@@ -23,7 +23,7 @@
 
 	const handleSubmit = (e) => {
         e.preventDefault();
-        goto(`/search?q=${query}`)
+        push(`/search?q=${query}`);
     };
 
     const handleInput = debounce(() => {
@@ -33,7 +33,9 @@
 </script>
 
 <header>
-	<h2>{headerTitle}</h2>
+    <a href="/" use:link>
+        <h2>{headerTitle}</h2>
+    </a>
 	<form on:submit={handleSubmit}>
 		<input placeholder="Search subreddit..." on:input={handleInput} bind:value={query} />
 		{#if Boolean(results.length)}

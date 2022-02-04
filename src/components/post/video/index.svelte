@@ -1,8 +1,6 @@
 <script>
-	import { base } from '$app/paths';
 	import { inview } from 'svelte-inview';
 	import { onMount } from 'svelte';
-
 	export let data;
 	const {
 		media,
@@ -68,7 +66,7 @@
 			{/if}
 
 			<vm-ui>
-				<vm-icon-library name="micke" resolver={(iconName) => `${base}/icons/${iconName}.svg`}></vm-icon-library>
+				<vm-icon-library name="micke" resolver={(iconName) => `/src/assets/icons/${iconName}.svg`}></vm-icon-library>
 				<vm-click-to-play></vm-click-to-play>
 				<vm-controls>
 					<vm-playback-control icons="micke" hide-tooltip></vm-playback-control>

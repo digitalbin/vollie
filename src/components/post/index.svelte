@@ -1,10 +1,10 @@
 <script>
-	import Top from './top.svelte';
-	import Bottom from './bottom.svelte';
-	import Link from './link/index.svelte';
-	import Text from './text/index.svelte';
-	import Image from './image/index.svelte';
-	import Video from './video/index.svelte';
+	import Top from './Top.svelte';
+	import Bottom from './Bottom.svelte';
+	import Link from './Link/index.svelte';
+	import Text from './Text/index.svelte';
+	import Image from './Image/index.svelte';
+	import Video from './Video/index.svelte';
 
 	function getPostType(props) {
 		const {

@@ -1,7 +1,7 @@
 <script>
-    import { base } from '$app/paths';
     import he from 'he';
-    import Avatar from '../avatar.svelte';
+    import { link } from 'svelte-spa-router';
+    import Avatar from '../Avatar.svelte';
     import { timeSince } from '../../utils';
 
     export let title;
@@ -14,6 +14,21 @@
     const subredditLink = `/${rsubreddit}`;
     const timeAgo = timeSince(created);
 </script>
+
+<div>
+    <a href={subredditLink} use:link>
+        <Avatar type="subreddit" name={subreddit} />
+        <span class="sub-title">
+            {rsubreddit}
+        </span>
+        <span class="created">
+            &nbsp;•&nbsp;{timeAgo}
+        </span>
+    </a>
+</div>
+<a href={permalink} class="title" use:link>
+    <h3>{decodedTitle}</h3>
+</a>
 
 <style>
     div {
@@ -35,18 +50,3 @@
         @apply text-default break-words font-bold;
     }
 </style>
-
-<div>
-    <a href={base + subredditLink}>
-        <Avatar type="subreddit" name={subreddit} />
-        <span class="sub-title">
-            {rsubreddit}
-        </span>
-        <span class="created">
-            &nbsp;•&nbsp;{timeAgo}
-        </span>
-    </a>
-</div>
-<a href={base + permalink} class="title">
-    <h3>{decodedTitle}</h3>
-</a>

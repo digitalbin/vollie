@@ -1,6 +1,6 @@
 <script>
-    import Single from './single.svelte';
-    import Gallery from './gallery.svelte';
+    import Single from './Single.svelte';
+    import Gallery from './Gallery.svelte';
     export let data;
     const { is_gallery } = data;
 </script>

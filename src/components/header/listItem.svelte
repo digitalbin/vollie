@@ -1,5 +1,5 @@
 <script>
-	import { base } from '$app/paths';
+	import {link} from 'svelte-spa-router'
     import { kFormatter } from '../../utils/index';
 	export let data;
 	const {
@@ -14,7 +14,7 @@
 
 {#if url}
 	<li>
-		<a href={base + url}>
+		<a href={url} use:link>
             {#if iconUrl}
                 <img
                     alt={`Icon for ${display_name_prefixed}`}

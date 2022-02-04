@@ -1,5 +1,5 @@
 <script>
-	import { base } from '$app/paths'
+	import spinner from '../assets/vollie.svg'
     import { createEventDispatcher } from 'svelte';
     import { inview } from 'svelte-inview';
     
@@ -7,7 +7,7 @@
     
 </script>
 <div use:inview on:change={({ detail }) => dispatch('inview', detail)}>
-	<img src={base + '/vollie.svg'} alt="spinner" width={30} height={30} />
+	<img src={spinner} alt="spinner" width={30} height={30} />
 </div>
 
 <style>

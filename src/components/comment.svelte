@@ -1,6 +1,6 @@
 <script>
 	import he from 'he';
-	import Avatar from './avatar.svelte';
+	import Avatar from './Avatar.svelte';
 	import { timeSince, kFormatter } from '../utils';
 
 	export let data;
