@@ -34,8 +34,10 @@
     let ready = false;
     let mounted = false;
 
-    const hlsUrl =
-        media?.reddit_video?.hls_url || preview?.reddit_video_preview?.hls_url;
+    const {
+		hls_url: hlsUrl,
+		dash_url: dashUrl,
+	} = media?.reddit_video || preview?.reddit_video_preview || {};
     const { width, height } = media?.reddit_video || media?.oembed || {};
 
     const isYT = Boolean(media.oembed);
@@ -60,7 +62,7 @@
         if (ready && isInView) player.play();
         else player?.pause();
     }
-
+	console.log(media);
     $: {
         const scale = Math.min(MAX_H / height, MAX_W / width);
         size = [width * scale, height * scale].map(Math.round);
@@ -82,6 +84,12 @@
                 loop
                 aspect-ratio={size.join(':')}
             >
+				<!-- {#if dashUrl}
+					<vm-dash
+						src={dashUrl}
+						version="latest"
+					></vm-dash>
+				{/if} -->
                 {#if hlsUrl}
                     <vm-hls>
                         <source

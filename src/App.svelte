@@ -1,9 +1,10 @@
 
 <script>
 	import { QueryClient, QueryClientProvider } from '@sveltestack/svelte-query';
-	import Router, { location, params } from 'svelte-spa-router';
+	import Router from 'svelte-spa-router';
 	import { pageTitle } from './stores';
 	import Header from './components/Header/index.svelte';
+	import SW from './components/SW.svelte';
   	import List from './views/List.svelte';
   	import Post from './views/Post.svelte';
   	import Search from './views/Search.svelte';
@@ -29,6 +30,7 @@
 	<title>{title}</title>
 </svelte:head>
 <QueryClientProvider client={queryClient}>
+	<SW />
 	<div>
 		<Header />
 		<main>
