@@ -1,5 +1,5 @@
 <script>
-	import spinner from '../assets/vollie.svg'
+	import spinner from '/vollie.svg'
     import { createEventDispatcher } from 'svelte';
     import { inview } from 'svelte-inview';
     

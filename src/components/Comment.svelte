@@ -59,7 +59,7 @@
 	.thread:before {
 		content: '';
 		@apply absolute left-0 top-xl -bottom-lg w-lg;
-		background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 0L10 20' stroke='%23eee' stroke-width='2' /%3E%3C/svg%3E%0A");
+		background-image: url('../line.svg');
 	}
 	button {
 		@apply
@@ -86,7 +86,7 @@
 	ul:before {
 		content: '';
 		@apply w-lg h-xl absolute left-0 -top-sm;
-		background-image: url("data:image/svg+xml,%3Csvg width='20' height='30' viewBox='0 0 20 30' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10L9.00001 10L9.00001 10L10 10ZM9.00001 10C9.00001 16.0751 13.9249 21 20 21L20 19C15.0294 19 11 14.9706 11 10L9.00001 10ZM11 10V0H9.00001V10H11Z' fill='%23eee' /%3E%3C/svg%3E");
+		background-image: url('../curve.svg');
 		background-size: cover;
 	}
 

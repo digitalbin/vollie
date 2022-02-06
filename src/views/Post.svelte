@@ -26,7 +26,7 @@
 <div>
 	{#each comments as { data } (data.id)}
 		<ul>
-			<Comment data={data} isLast={false} />
+			<Comment data={data} isLast={true} />
 		</ul>
 	{/each}
 </div>

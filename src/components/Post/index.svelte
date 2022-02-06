@@ -1,10 +1,15 @@
 <script>
+	import { onMount } from 'svelte';
 	import Top from './Top.svelte';
 	import Bottom from './Bottom.svelte';
 	import Link from './Link/index.svelte';
 	import Text from './Text/index.svelte';
 	import Image from './Image/index.svelte';
-	import Video from './Video/index.svelte';
+
+	let Video;
+	onMount(async () => {
+		Video = (await import('./Video/index.svelte')).default;
+	})
 
 	function getPostType(props) {
 		const {
@@ -51,7 +56,8 @@
 		{:else if postType == 'image'}
 			<Image {data} />
 		{:else if postType == 'video'}
-			<Video {data} />
+			<svelte:component this={Video} {data} />
+			<!-- <Video {data} /> -->
 		{/if}
 	{/if}
 	<Bottom {num_comments} {ups} />

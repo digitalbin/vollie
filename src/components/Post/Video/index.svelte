@@ -1,22 +1,11 @@
 <script>
-    import fullscreenEnter from '../../../assets/icons/fullscreen-enter.svg';
-    import fullscreenExit from '../../../assets/icons/fullscreen-exit.svg';
-    import pause from '../../../assets/icons/pause.svg';
-    import play from '../../../assets/icons/play.svg';
-    import volumeHigh from '../../../assets/icons/volume-high.svg';
-    import volumeMute from '../../../assets/icons/volume-mute.svg';
-
-    const icons = {
-        'fullscreen-enter': fullscreenEnter,
-        'fullscreen-exit': fullscreenExit,
-        pause,
-        play,
-        'volume-high': volumeHigh,
-        'volume-mute': volumeMute,
-    };
-
+    import 'videojs-youtube';
+    import { tap } from '@sveltejs/gestures';
+    import videojs from 'video.js';
+    import 'video.js/dist/video-js.css';
     import { inview } from 'svelte-inview';
-    import { onMount } from 'svelte';
+    import { onDestroy, onMount } from 'svelte';
+
     export let data;
     const {
         media,
@@ -27,128 +16,183 @@
 
     let MAX_W;
     let MAX_H = 500;
-    let size = [0, 0];
 
+    let videoElm;
     let player;
-    let isInView = false;
-    let ready = false;
-    let mounted = false;
 
-    const {
-		hls_url: hlsUrl,
-		dash_url: dashUrl,
-	} = media?.reddit_video || preview?.reddit_video_preview || {};
+    const { hls_url, dash_url, fallback_url } = media?.reddit_video || preview?.reddit_video_preview || {};
     const { width, height } = media?.reddit_video || media?.oembed || {};
 
-    const isYT = Boolean(media.oembed);
-    const ytUrl = new URL(url_overridden_by_dest);
-    const ytId = ytUrl.searchParams.get('v') || ytUrl.pathname.replace('/', '');
+    const yt_url = url_overridden_by_dest.includes('you') && url_overridden_by_dest;
 
     const onInView = ({ detail }) => {
-        isInView = detail.inView;
+        if (detail.inView) player.play();
+        else player.pause();
     };
 
-    const handleReady = () => {
-        ready = true;
+    const togglePlay = () => {
+        if (player.paused()) player.play();
+        else player.pause();
     };
 
-    onMount(async () => {
-        const { defineCustomElements } = await import('@vime/core');
-        defineCustomElements();
-        mounted = true;
+    $: {
+        if (player) {
+            const scale = Math.min(MAX_H / height, MAX_W / width);
+            player.width(width * scale);
+            player.height(height * scale);
+        }
+    }
+
+    const sources = [
+        {
+            src: dash_url,
+            type: 'application/dash+xml'
+        },
+        {
+            src: hls_url,
+            type: 'application/x-mpegURL'
+        },
+        {
+            src: fallback_url,
+            type: 'video/mp4'
+        },
+        {
+            src: yt_url,
+            type: 'video/youtube',
+        }
+    ].filter(({ src }) => Boolean(src));
+
+    onMount(() => {
+        player = videojs(videoElm, {
+            autoplay: true,
+            muted: true,
+            controls: true,
+            responsive: true,
+            loop: true,
+            inactivityTimeout: 2000,
+            bigPlayButton: false,
+            nativeControlsForTouch: false,
+            controlBar: {
+                remainingTimeDisplay: false,
+                volumePanel: false,
+                // @ts-ignore
+                muteToggle: true,
+                pictureInPictureToggle: false,
+            },
+            techOrder: ['html5', 'youtube'],
+            sources,
+        });
     });
 
-    $: {
-        if (ready && isInView) player.play();
-        else player?.pause();
-    }
-	console.log(media);
-    $: {
-        const scale = Math.min(MAX_H / height, MAX_W / width);
-        size = [width * scale, height * scale].map(Math.round);
-    }
+    onDestroy(() => {
+        player.dispose();
+        player = null;
+    });
 </script>
 
 <div
-    use:inview={{ threshold: 0.9 }}
-    bind:clientWidth={MAX_W}
-    on:change={onInView}
+use:inview={{ threshold: 0.9 }}
+bind:clientWidth={MAX_W}
+on:change={onInView}
 >
-    {#if mounted}
-        <div class="player" style="width: {size[0]}px; height: {size[1]}px">
-            <vm-player
-                bind:this={player}
-                on:vmPlaybackReady={handleReady}
-                muted
+<div class="player-wrapper">
+    <div data-vjs-player>
+        <!-- svelte-ignore a11y-media-has-caption -->
+            <video
                 playsinline
-                loop
-                aspect-ratio={size.join(':')}
-            >
-				<!-- {#if dashUrl}
-					<vm-dash
-						src={dashUrl}
-						version="latest"
-					></vm-dash>
-				{/if} -->
-                {#if hlsUrl}
-                    <vm-hls>
-                        <source
-                            data-src={hlsUrl}
-                            type="application/x-mpegURL"
-                        />
-                    </vm-hls>
-                {:else if isYT && ytId}
-                    <vm-youtube video-id={ytId} />
-                {/if}
-
-                <vm-ui>
-                    <vm-icon-library
-                        name="micke"
-                        resolver={(iconName) => icons[iconName]}
-                    />
-                    <vm-click-to-play />
-                    <vm-controls>
-                        <vm-playback-control icons="micke" hide-tooltip />
-                        <vm-scrubber-control hide-tooltip />
-                        <vm-time-progress />
-                        <vm-fullscreen-control hide-tooltip icons="micke" />
-                        <vm-mute-control hide-tooltip icons="micke" />
-                    </vm-controls>
-                </vm-ui>
-            </vm-player>
+                bind:this={videoElm}
+                class="video-js"
+                use:tap
+                on:tap={togglePlay}
+            />
         </div>
-    {/if}
+    </div>
 </div>
 
 <style>
-    @import url('@vime/core/themes/default.css');
-    :global(vm-player) {
-        --vm-slider-value-color: theme('colors.primary');
-        --vm-control-icon-size: 15px;
-        --vm-time-font-size: 12px;
-        --vm-player-font-family: theme('fontFamily.sans');
-        --vm-slider-track-color: rgba(255, 255, 255, 0.25);
-        --vm-scrubber-loading-stripe-color: theme('colors.black');
-        --vm-scrubber-buffered-bg: rgba(255, 255, 255, 0.25);
-        --vm-controls-bg: rgba(17, 17, 17, 0.8);
-        --vm-controls-border-radius: theme('borderRadius.px')
-            theme('borderRadius.px') theme('borderRadius.sm')
-            theme('borderRadius.sm');
-        --vm-control-focus-bg: none;
-        --vm-control-focus-color: none;
-        --vm-control-scale: sdgfadg;
-        --vm-controls-padding: 5px;
-        font-size: 12px;
+    div.player-wrapper {
+        @apply rounded overflow-hidden bg-subtle mx-auto w-fit relative z-10;
     }
-    :global(vm-controls) {
-        @apply left-xs
-			right-xs
-			bottom-xs
-			top-auto
-			w-auto;
+
+    :global(.video-js .vjs-play-progress) {
+        @apply bg-primary;
+    }
+
+    :global(.video-js .vjs-load-progress div) {
+        @apply bg-default bg-opacity-50;
+    }
+
+    :global(.video-js .vjs-progress-holder) {
+        height: 2px;
+    }
+
+    :global(.video-js .vjs-play-progress:before) {
+        @apply right-0 top-1/2 translate-x-1/2 -translate-y-1/2;
+        font-size: 10px;
+    }
+
+    :global(.video-js .vjs-control-bar) {
+        @apply left-xs right-xs bottom-xs w-auto rounded-t-px rounded-b-sm bg-inverse bg-opacity-80;
         height: 38px;
     }
-    div.player {
-        @apply rounded overflow-hidden bg-subtle mx-auto;
+
+    :global(.video-js .vjs-icon-placeholder:before) {
+        content: '' !important;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    :global(.video-js
+            button.vjs-play-control.vjs-playing
+            > span.vjs-icon-placeholder:before) {
+        background-image: url('../icons/pause.svg');
+    }
+    :global(.video-js
+            button.vjs-play-control.vjs-paused
+            > span.vjs-icon-placeholder:before) {
+        background-image: url('../icons/play.svg');
+    }
+
+    :global(.video-js button.vjs-mute-control) {
+        order: 3;
+    }
+    :global(.video-js
+            button.vjs-mute-control.vjs-vol-0
+            > span.vjs-icon-placeholder:before) {
+        background-image: url('../icons/volume-mute.svg');
+    }
+
+    :global(.video-js
+            button.vjs-mute-control.vjs-vol-3
+            > span.vjs-icon-placeholder:before) {
+        background-image: url('../icons/volume-high.svg');
+    }
+
+    :global(.video-js button.vjs-fullscreen-control) {
+        order: 2;
+    }
+    :global(.video-js
+            button.vjs-fullscreen-control[title='Fullscreen']
+            > span.vjs-icon-placeholder:before) {
+        background-image: url('../icons/fullscreen-enter.svg');
+    }
+
+    :global(.video-js
+            button.vjs-fullscreen-control[title='Exit Fullscreen']
+            > span.vjs-icon-placeholder:before) {
+        background-image: url('../icons/fullscreen-exit.svg');
+    }
+
+    :global(.video-js .vjs-current-time-display, .video-js
+            .vjs-duration-display) {
+        width: 27px;
+    }
+
+    :global(.video-js .vjs-time-control) {
+        order: 1;
+        @apply font-sans font-regular text-tiny flex items-center p-0;
+    }
+    :global(.video-js .vjs-time-divider) {
+        @apply px-xs min-w-0;
     }
 </style>

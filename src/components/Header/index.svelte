@@ -63,6 +63,12 @@
         border-t-0
         z-50;
 	}
+    header a {
+        @apply overflow-hidden;
+    }
+    h2 {
+        @apply overflow-hidden whitespace-nowrap overflow-ellipsis;
+    }
 	input {
 		@apply bg-subtle
         p-sm

@@ -29,4 +29,7 @@
 	figure {
 		@apply mr-sm w-lg h-lg bg-subtle rounded-full overflow-hidden flex-none;
 	}
+	img {
+		@apply w-lg h-lg object-cover;
+	}
 </style>
