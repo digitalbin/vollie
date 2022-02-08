@@ -7,7 +7,6 @@
 	import { pageTitle } from '../stores';
 
 	const res = useQuery($location, () => fetchPageData($location), {
-		refetchOnMount: false,
 		cacheTime: Infinity,
 		staleTime: Infinity,
 	});

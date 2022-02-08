@@ -18,13 +18,11 @@ svg {
 	@apply pointer-events-none;
 }
 
-/* Hide scrollbar for Chrome, Safari and Opera */
-svelte-virtual-list-viewport::-webkit-scrollbar {
+/* svelte-virtual-list-viewport::-webkit-scrollbar {
 	display: none;
 }
 
-/* Hide scrollbar for IE, Edge and Firefox */
 svelte-virtual-list-viewport {
-	-ms-overflow-style: none; /* IE and Edge */
-	scrollbar-width: none; /* Firefox */
-}
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+} */

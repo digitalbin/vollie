@@ -13,7 +13,6 @@
         ({ pageParam }) => fetchPageData($location, { after: pageParam, q }),
         {
             getNextPageParam: (prev) => prev?.data?.after,
-            refetchOnMount: false,
             cacheTime: Infinity,
             staleTime: Infinity,
         },
@@ -35,7 +34,7 @@
 {/each}
 
 {#if $res.hasNextPage}
-    <Spinner on:inview={handleInview} />
+    <Spinner _class="p-90" on:inview={handleInview} />
 {/if}
 
 <style>
