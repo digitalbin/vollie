@@ -39,7 +39,7 @@
         right-0
         bottom-0
         h-90;
-		background-image: linear-gradient(to bottom, rgb(255 255 255 / 0), var(--bg-default) 60%);
+		background-image: linear-gradient(to bottom, var(--bg-default-transparent), var(--bg-default) 60%);
 	}
 
 	.open {

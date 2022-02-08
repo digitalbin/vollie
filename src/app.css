@@ -19,6 +19,7 @@
 	--text-inverse: var(--white);
 
 	--bg-default: var(--white);
+	--bg-default-transparent: rgba(255, 255, 255, 0);
 	--bg-subtle: var(--gray-light);
 	--bg-inverse: var(--black);
 
@@ -32,6 +33,7 @@
 	--text-inverse: var(--black);
 
 	--bg-default: var(--black);
+	--bg-default-transparent: rgba(17, 17, 17, 0);
 	--bg-subtle: var(--gray-darker);
 	--bg-inverse: var(--white);
 
