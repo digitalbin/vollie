@@ -19,18 +19,6 @@ module.exports = {
 			600: '600px',
 			full: '100%'
 		},
-		textColor: {
-			default: '#111',
-			subtle: '#404040',
-			inverse: '#fff'
-		},
-		backgroundColor: {
-			default: '#fff',
-			subtle: '#eee',
-			inverse: '#111',
-			foreground: '#fafafa',
-			primary: '#74FF66'
-		},
 		fontSize: {
 			tall: ['18px', '140%'],
 			default: ['15px', '140%'],
@@ -43,10 +31,9 @@ module.exports = {
 			black: '800'
 		},
 		borderColor: {
-			DEFAULT: '#eee',
-			black: '#111',
-			transparent: 'transparent',
-			primary: '#74FF66'
+			DEFAULT: 'var(--border-default)',
+			black: 'var(--black)',
+			primary: 'var(--primary)',
 		},
 		borderRadius: {
 			px: '1px',
@@ -65,8 +52,25 @@ module.exports = {
 		},
 		extend: {
 			colors: {
-				primary: '#74FF66',
-				white: '#fff',
+				black: 'var(--black)',
+				gray: {
+					darker: 'var(--gray-darker)',
+					dark: 'var(--gray-dark)',
+					light: 'var(--gray-light)',
+					lighter: 'var(--gray-lighter)',
+				},
+				white: 'var(--white)',
+				primary: 'var(--primary)',
+			},
+			backgroundColor: {
+				default: 'var(--bg-default)',
+				subtle: 'var(--bg-subtle)',
+				inverse: 'var(--bg-inverse)',
+			},
+			textColor: {
+				default: 'var(--text-default)',
+				subtle: 'var(--text-subtle)',
+				inverse: 'var(--text-inverse)'
 			},
 			maxHeight: {
 				post: '500px'

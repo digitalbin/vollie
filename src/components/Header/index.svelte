@@ -1,13 +1,12 @@
 <script>
     import debounce from "just-debounce-it";
-    import { location, push, link, params } from 'svelte-spa-router';
+    import { push } from 'svelte-spa-router';
 	import ListItem from './ListItem.svelte';
-
-	$: subreddit = $params?.subreddit || 'popular';
-	$: headerTitle = $location === '/search' ? 'search' : `r/${subreddit}`;
+	import Dropdown from './Dropdown.svelte';
 
     let query = '';
 	let results = [];
+    let focus;
 
     const doSearch = () => {
         const url = new URL(
@@ -26,6 +25,10 @@
         push(`/search?q=${query}`);
     };
 
+    const handleFocus = (e) => {
+        focus = e.type === 'focusin';
+    }
+
     const handleInput = debounce(() => {
         doSearch();
     }, 500)
@@ -33,12 +36,10 @@
 </script>
 
 <header>
-    <a href="/" use:link>
-        <h2>{headerTitle}</h2>
-    </a>
-	<form on:submit={handleSubmit}>
+    <Dropdown />
+	<form on:submit={handleSubmit} on:focusin={handleFocus} on:blur={handleFocus}>
 		<input placeholder="Search subreddit..." on:input={handleInput} bind:value={query} />
-		{#if Boolean(results.length)}
+		{#if Boolean(results.length && focus)}
 			<ul>
 				{#each results as { data } (data.id)}
 					<ListItem {data} />
@@ -57,18 +58,10 @@
         top-0
         sticky
         p-md
-        font-black
-        text-tall
         border
         border-t-0
         z-50;
 	}
-    header a {
-        @apply overflow-hidden;
-    }
-    h2 {
-        @apply overflow-hidden whitespace-nowrap overflow-ellipsis;
-    }
 	input {
 		@apply bg-subtle
         p-sm

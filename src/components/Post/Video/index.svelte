@@ -119,7 +119,7 @@ on:change={onInView}
     }
 
     :global(.video-js .vjs-load-progress div) {
-        @apply bg-default bg-opacity-50;
+        @apply bg-white bg-opacity-50;
     }
 
     :global(.video-js .vjs-progress-holder) {
@@ -132,7 +132,7 @@ on:change={onInView}
     }
 
     :global(.video-js .vjs-control-bar) {
-        @apply left-xs right-xs bottom-xs w-auto rounded-t-px rounded-b-sm bg-inverse bg-opacity-80;
+        @apply left-xs right-xs bottom-xs w-auto rounded-t-px rounded-b-sm bg-black bg-opacity-80;
         height: 38px;
     }
 
