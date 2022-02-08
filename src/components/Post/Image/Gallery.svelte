@@ -1,5 +1,4 @@
 <script>
-	// @ts-nocheck
 	import { inview } from 'svelte-inview';
 	import { Swiper, SwiperSlide } from 'swiper/svelte';
 	import { Autoplay, Pagination } from 'swiper';

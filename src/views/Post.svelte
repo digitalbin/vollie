@@ -1,8 +1,10 @@
 <script>
+	import { fade } from 'svelte/transition';
 	import { useQuery } from '@sveltestack/svelte-query';
 	import { location } from 'svelte-spa-router'
 	import Post from '../components/Post/index.svelte';
 	import Comment from '../components/Comment.svelte';
+	import Spinner from '../components/Spinner.svelte';
 	import { fetchPageData } from '../requests';
 	import { pageTitle } from '../stores';
 
@@ -16,15 +18,19 @@
 	$: $pageTitle = post?.title;
 </script>
 
+{#if $res.isLoading}
+    <Spinner />
+{/if}
+
 {#if post}
-    <section>
+    <section in:fade>
         <Post data={post} />
     </section>
 {/if}
 
 <div>
 	{#each comments as { data } (data.id)}
-		<ul>
+		<ul in:fade>
 			<Comment data={data} isLast={true} />
 		</ul>
 	{/each}

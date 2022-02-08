@@ -31,8 +31,8 @@ module.exports = {
 			black: '800'
 		},
 		borderColor: {
-			DEFAULT: 'var(--border-default)',
-			black: 'var(--black)',
+			DEFAULT: 'var(--border-soft)',
+			hard: 'var(--border-hard)',
 			primary: 'var(--primary)',
 		},
 		borderRadius: {

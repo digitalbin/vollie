@@ -15,21 +15,23 @@
 </a>
 
 <style>
+    a {
+        @apply block;
+    }
 	span {
 		@apply block
         overflow-ellipsis
         overflow-hidden
         relative
         whitespace-nowrap
-        -mt-sm
-        mb-md
+        mb-sm
         text-tiny;
 		max-width: 190px;
 	}
 
 	span:before {
 		content: '';
-		@apply absolute inset-0 border-b border-black;
+		@apply absolute inset-0 border-b border-hard;
 	}
 
     img {

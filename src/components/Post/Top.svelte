@@ -32,7 +32,7 @@
 
 <style>
     div {
-        @apply text-default mb-xs;
+        @apply text-default mb-sm;
     }
     div a {
         @apply font-bold text-tiny flex items-center;
@@ -44,7 +44,7 @@
         @apply text-subtle font-regular flex-1 whitespace-nowrap;
     }
     a.title {
-        @apply mb-md block;
+        @apply mb-sm block;
     }
     h3 {
         @apply text-default break-words font-bold;

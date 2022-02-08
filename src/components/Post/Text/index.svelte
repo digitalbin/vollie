@@ -2,16 +2,18 @@
 	export let data;
 	const { selftext } = data;
     const paragraphs = selftext.split('\n');
+	let h;
 	let open = false;
 	const toggleOpen = () => (open = !open);
 </script>
 
-<div on:click={toggleOpen} class:open>
-    {#each paragraphs as paragraph}
-        <p>{paragraph}</p>
-    {/each}
-    <span>Expand +</span>
-</div>
+{#if Boolean(selftext)}
+	<div bind:clientHeight={h} on:click={toggleOpen} class:open class:masked={h >= 160 && !open}>
+		{#each paragraphs as paragraph}
+			<p>{paragraph}</p>
+		{/each}
+	</div>
+{/if}
 
 <style>
 	div {
@@ -23,9 +25,16 @@
 		cursor-pointer;
 	}
 
-	div:before {
-		content: '';
-		@apply absolute
+	div.masked:before {
+		content: 'Expand +';
+		@apply
+		absolute
+		flex
+		items-end
+		text-tall
+		font-bold
+		pb-lg
+		justify-center
         left-0
         right-0
         bottom-0
@@ -45,18 +54,4 @@
         @apply mb-sm;
     }
 
-	span {
-		@apply text-default
-        font-bold
-        block
-        absolute
-        bottom-sm
-        left-0
-        right-0
-        text-center;
-	}
-
-	.open span {
-		@apply hidden;
-	}
 </style>

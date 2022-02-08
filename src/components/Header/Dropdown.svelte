@@ -9,9 +9,9 @@
     let darkMode;
     try {
         darkMode =
-        localStorage.theme === 'dark' ||
-        (!('theme' in localStorage) &&
-            window.matchMedia('(prefers-color-scheme: dark)').matches);
+            localStorage.theme === 'dark' ||
+            (!('theme' in localStorage) &&
+                window.matchMedia('(prefers-color-scheme: dark)').matches);
     } catch (err) {
         console.log('Cannot access localStorage');
     }
@@ -40,8 +40,15 @@
     const toggleOpen = () => {
         isOpen = !isOpen;
     };
+
+    location.subscribe(() => {
+        isOpen = false;
+    });
 </script>
 
+<svelte:head>
+    <meta name="theme-color" content={darkMode ? '#111111' : '#FFFFFF'} />
+</svelte:head>
 <div>
     <button on:click={toggleOpen}>
         <svg
@@ -63,14 +70,16 @@
         <aside transition:slide>
             <ul>
                 {#if $params?.subreddit}
-                <li>
-                    <a use:link href="/">r/popular</a>
-                </li>
+                    <li>
+                        <a use:link href="/">r/popular</a>
+                    </li>
                 {/if}
                 {#if $params?.wild}
-                <li>
-                    <a use:link href={`/r/${$params.subreddit}`}>r/{$params.subreddit}</a>
-                </li>
+                    <li>
+                        <a use:link href={`/r/${$params.subreddit}`}
+                            >r/{$params.subreddit}</a
+                        >
+                    </li>
                 {/if}
                 <li class="flex gap-sm">
                     <svg
@@ -121,14 +130,14 @@
         @apply rotate-180;
     }
     aside {
-        @apply
-            absolute
+        @apply absolute
             left-0
             right-0
             bg-default
             px-md
             border-b
             top-full;
+        min-height: 50%;
     }
     ul {
         @apply flex

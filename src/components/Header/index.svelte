@@ -1,6 +1,7 @@
 <script>
     import debounce from "just-debounce-it";
     import { push } from 'svelte-spa-router';
+    import clickOutside from "../../utils/clickOutside";
 	import ListItem from './ListItem.svelte';
 	import Dropdown from './Dropdown.svelte';
 
@@ -37,7 +38,7 @@
 
 <header>
     <Dropdown />
-	<form on:submit={handleSubmit} on:focusin={handleFocus} on:blur={handleFocus}>
+	<form on:submit={handleSubmit} on:focusin={handleFocus} use:clickOutside on:clickoutside={handleFocus}>
 		<input placeholder="Search subreddit..." on:input={handleInput} bind:value={query} />
 		{#if Boolean(results.length && focus)}
 			<ul>

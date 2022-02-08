@@ -60,7 +60,7 @@
 			<!-- <Video {data} /> -->
 		{/if}
 	{/if}
-	<Bottom {num_comments} {ups} />
+	<Bottom {num_comments} {ups} {permalink} />
 </article>
 
 <style>

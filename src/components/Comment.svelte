@@ -27,7 +27,7 @@
 {#if body_html}
 	<li class:thread={!isLast}>
 		<div class="container" class:thread={isOpen && (!isLast || hasReplies)}>
-			<button on:click={toggleOpen} />
+			<button on:click={toggleOpen} aria-label={isOpen ? 'Hide comment' : 'Show comment'} />
 			<Avatar type="user" name={author} />
 			<div class="text-container">
 				{#if !isOpen}

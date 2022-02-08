@@ -15,14 +15,15 @@
 
 :root {
 	--text-default: var(--black);
-	--text-subtle: var(--gray-dark);
+	--text-subtle: var(--gray-darker);
 	--text-inverse: var(--white);
 
 	--bg-default: var(--white);
 	--bg-subtle: var(--gray-light);
 	--bg-inverse: var(--black);
 
-	--border-default: var(--gray-lighter);
+	--border-soft: var(--gray-lighter);
+	--border-hard: var(--black);
 }
 
 .dark:root {
@@ -34,7 +35,8 @@
 	--bg-subtle: var(--gray-darker);
 	--bg-inverse: var(--white);
 
-	--border-default: var(--gray-darker);
+	--border-soft: var(--gray-darker);
+	--border-hard: var(--white);
 }
 
 html {

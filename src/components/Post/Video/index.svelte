@@ -75,7 +75,6 @@
             controlBar: {
                 remainingTimeDisplay: false,
                 volumePanel: false,
-                // @ts-ignore
                 muteToggle: true,
                 pictureInPictureToggle: false,
             },

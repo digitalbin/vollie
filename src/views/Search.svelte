@@ -1,4 +1,5 @@
 <script>
+    import { fade } from 'svelte/transition';
     import { useInfiniteQuery } from '@sveltestack/svelte-query';
     import { location, querystring } from 'svelte-spa-router';
     import Spinner from '../components/Spinner.svelte';
@@ -25,16 +26,20 @@
     $: pages = $res.data?.pages || [];
 </script>
 
+{#if $res.isLoading}
+    <Spinner />
+{/if}
+
 {#each pages as { data: { after, children } } (after)}
     {#each children as { data } (data.id)}
-        <section>
+        <section in:fade>
             <Post {data} />
         </section>
     {/each}
 {/each}
 
 {#if $res.hasNextPage}
-    <Spinner _class="p-90" on:inview={handleInview} />
+    <Spinner on:inview={handleInview} />
 {/if}
 
 <style>
