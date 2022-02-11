@@ -8,16 +8,19 @@
 	const upvotes = kFormatter(ups);
 </script>
 
-<a href={permalink} use:link>
-	<span>{num_comments} comments</span>
+<div>
+	<a href={permalink} use:link>{num_comments} comments</a>
 	{upvotes} upvotes
-</a>
+</div>
 
 <style>
-	a {
+	div {
 		@apply text-subtle text-tiny mt-md block;
 	}
-	span {
-		@apply mr-sm;
+	a {
+		@apply mr-sm decoration-transparent underline underline-offset-2 transition-all duration-200;
+	}
+	a:hover {
+		@apply decoration-inherit;
 	}
 </style>
