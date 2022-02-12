@@ -9,7 +9,7 @@
 </script>
 
 <a href={permalink} use:link>
-	<span>{num_comments} comments</span>
+	<span class="link-ish">{num_comments} comments</span>
 	{upvotes} upvotes
 </a>
 

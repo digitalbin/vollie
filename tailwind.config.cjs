@@ -30,15 +30,11 @@ module.exports = {
 			bold: '600',
 			black: '800'
 		},
-		borderColor: {
-			DEFAULT: 'var(--border-soft)',
-			hard: 'var(--border-hard)',
-			primary: 'var(--primary)',
-		},
 		borderRadius: {
 			px: '1px',
 			sm: '1rem',
-			DEFAULT: '1.5rem',
+			DEFAULT: '15px',
+			lg: '20px',
 			full: '9999px'
 		},
 		maxWidth: {
@@ -52,15 +48,15 @@ module.exports = {
 		},
 		extend: {
 			colors: {
-				black: 'var(--black)',
+				black: '#111111',
 				gray: {
-					darker: 'var(--gray-darker)',
-					dark: 'var(--gray-dark)',
-					light: 'var(--gray-light)',
-					lighter: 'var(--gray-lighter)',
+					darker: '#2D2D2D',
+					dark: '#808080',
+					light: '#F1F2F3',
+					lighter: '#E1E1E1',
 				},
-				white: 'var(--white)',
-				primary: 'var(--primary)',
+				white: '#FFFFFF',
+				primary: '#74FF66',
 			},
 			backgroundColor: {
 				default: 'var(--bg-default)',
@@ -71,6 +67,10 @@ module.exports = {
 				default: 'var(--text-default)',
 				subtle: 'var(--text-subtle)',
 				inverse: 'var(--text-inverse)'
+			},
+			borderColor: {
+				DEFAULT: 'var(--border-soft)',
+				hard: 'var(--border-hard)',
 			},
 			maxHeight: {
 				post: '500px'

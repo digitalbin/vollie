@@ -9,8 +9,8 @@
 	import { pageTitle } from '../stores';
 
 	const res = useQuery($location, () => fetchPageData($location), {
-		cacheTime: Infinity,
-		staleTime: Infinity,
+		// cacheTime: Infinity,
+		// staleTime: Infinity,
 	});
 
     $: post = $res?.data?.[0]?.data?.children?.[0]?.data;

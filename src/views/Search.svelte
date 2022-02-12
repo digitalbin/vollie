@@ -14,8 +14,8 @@
         ({ pageParam }) => fetchPageData($location, { after: pageParam, q }),
         {
             getNextPageParam: (prev) => prev?.data?.after,
-            cacheTime: Infinity,
-            staleTime: Infinity,
+            // cacheTime: Infinity,
+            // staleTime: Infinity,
         },
     );
 

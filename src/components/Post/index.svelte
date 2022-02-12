@@ -43,7 +43,7 @@
 </script>
 
 <article>
-	<Top {title} {subreddit} {permalink} {created} />
+	<Top {data} />
 	{#if isCrosspost}
 		<div>
 			<svelte:self data={parentProps} />

@@ -14,8 +14,9 @@
 
 	const routes = {
 		'/': List,
+		'/:sort?': List,
 		'/search': Search,
-		'/r/:subreddit': List,
+		'/r/:subreddit/:sort?': List,
 		'/r/:subreddit/*': Post,
 	}
 

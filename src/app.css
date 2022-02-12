@@ -3,14 +3,13 @@
 @tailwind utilities;
 
 :root {
-	--black: #111111;
-	--gray-darker: #2D2D2D;
-	--gray-dark: #808080;
-	--gray-light: #F1F2F3;
-	--gray-lighter: #E1E1E1;
-	--white: #FFFFFF;
-	
-	--primary: #74FF66;
+	--black: theme('colors.black');
+	--gray-darker: theme('colors.gray.darker');
+	--gray-dark: theme('colors.gray.dark');
+	--gray-light: theme('colors.gray.light');
+	--gray-lighter: theme('colors.gray.lighter');
+	--white: theme('colors.white');
+	--primary: theme('colors.primary');
 }
 
 :root {
@@ -57,11 +56,10 @@ svg {
 	@apply pointer-events-none;
 }
 
-/* svelte-virtual-list-viewport::-webkit-scrollbar {
-	display: none;
+.link-ish {
+	@apply decoration-transparent underline underline-offset-2 transition-all duration-200;
 }
 
-svelte-virtual-list-viewport {
-	-ms-overflow-style: none;
-	scrollbar-width: none;
-} */
+.link-ish:hover {
+	@apply decoration-inherit;
+}

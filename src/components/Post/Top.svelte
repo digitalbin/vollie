@@ -1,15 +1,15 @@
 <script>
     import he from 'he';
-    import { link } from 'svelte-spa-router';
+    import { link, params } from 'svelte-spa-router';
     import Avatar from '../Avatar.svelte';
     import { timeSince } from '../../utils';
 
-    export let title;
-    export let subreddit;
-    export let permalink;
-    export let created;
+    export let data;
+    const { title, subreddit, permalink, created, author } = data;
 
+    const isPost = Boolean($params?.wild);
     const decodedTitle = he.decode(title);
+    const uuser = `u/${author}`;
     const rsubreddit = `r/${subreddit}`;
     const subredditLink = `/${rsubreddit}`;
     const timeAgo = timeSince(created);
@@ -17,10 +17,17 @@
 
 <div>
     <a href={subredditLink} use:link>
-        <Avatar type="subreddit" name={subreddit} />
-        <span class="sub-title">
-            {rsubreddit}
-        </span>
+        {#if isPost}
+            <Avatar type="user" name={author} />
+            <span class="sub-title link-ish">
+                {uuser}
+            </span>
+        {:else}
+            <Avatar type="subreddit" name={subreddit} />
+            <span class="sub-title link-ish">
+                {rsubreddit}
+            </span>
+        {/if}
         <span class="created">
             &nbsp;•&nbsp;{timeAgo}
         </span>
@@ -32,7 +39,7 @@
 
 <style>
     div {
-        @apply text-default mb-sm;
+        @apply text-tiny mb-sm;
     }
     div a {
         @apply font-bold text-tiny flex items-center;
@@ -44,7 +51,7 @@
         @apply text-subtle font-regular flex-1 whitespace-nowrap;
     }
     a.title {
-        @apply mb-sm block;
+        @apply mb-sm block text-default;
     }
     h3 {
         @apply text-default break-words font-bold;
