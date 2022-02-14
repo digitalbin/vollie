@@ -5,6 +5,7 @@
 	import Post from '../components/Post/index.svelte';
 	import Comment from '../components/Comment.svelte';
 	import Spinner from '../components/Spinner.svelte';
+	import SEO from '../components/SEO.svelte';
 	import { fetchPageData } from '../requests';
 	import { pageTitle } from '../stores';
 
@@ -23,6 +24,7 @@
 {:else if $res.isSuccess}
 	{#if post}
 		<section in:fade>
+			<SEO data={post} />
 			<Post data={post} />
 		</section>
 	{/if}

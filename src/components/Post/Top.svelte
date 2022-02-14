@@ -33,9 +33,13 @@
         </span>
     </a>
 </div>
-<a href={permalink} class="title" use:link>
-    <h3>{decodedTitle}</h3>
-</a>
+{#if isPost}
+    <h1 class="title">{decodedTitle}</h1>
+{:else}
+    <a href={permalink} class="title" use:link>
+        <h3>{decodedTitle}</h3>
+    </a>
+{/if}
 
 <style>
     div {
@@ -50,8 +54,8 @@
     div a span:last-of-type {
         @apply text-subtle font-regular flex-1 whitespace-nowrap;
     }
-    a.title {
-        @apply mb-sm block text-default;
+    .title {
+        @apply mb-sm block text-default font-bold;
     }
     h3 {
         @apply text-default break-words font-bold;
