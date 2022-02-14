@@ -93,7 +93,8 @@
 			bg-opacity-80
 			px-sm
 			py-xs
-			rounded-sm;
+			rounded-sm
+            z-10;
     }
     img {
         @apply rounded object-contain h-full;

@@ -19,6 +19,7 @@
         bg-opacity-50
         fixed
         inset-0
-        touch-none;
+        touch-none
+        z-10;
     }
 </style>
