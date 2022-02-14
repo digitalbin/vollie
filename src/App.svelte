@@ -42,7 +42,7 @@
 
 <style>
 	div {
-		@apply mx-auto max-w-lg h-screen;
+		@apply mx-auto max-w-lg;
 	}
 	main {
 		@apply h-full;

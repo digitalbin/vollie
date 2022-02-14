@@ -11,7 +11,7 @@
 
 <style>
     label {
-        @apply text-default flex items-center gap-sm;
+        @apply text-default flex items-center gap-sm mb-xl;
     }
     input {
         @apply hidden;

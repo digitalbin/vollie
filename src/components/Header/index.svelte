@@ -1,105 +1,56 @@
 <script>
-    import debounce from "just-debounce-it";
-    import { push } from 'svelte-spa-router';
-    import clickOutside from "../../utils/clickOutside";
-	import ListItem from './ListItem.svelte';
-	import Dropdown from './Dropdown.svelte';
+    import { params, location, pop } from 'svelte-spa-router';
+    import ThemeSettings from './ThemeSettings/index.svelte';
+    import Search from './Search.svelte';
+    import InteractiveLogo from './InteractiveLogo.svelte';
+    import Icon from '../Icon.svelte';
 
-    let query = '';
-	let results = [];
-    let focus;
+    $: subreddit = $params?.subreddit || 'popular';
+    $: headerTitle = $location === '/search' ? 'search' : `r/${subreddit}`;
 
-    const doSearch = () => {
-        const url = new URL(
-            'https://www.reddit.com/api/subreddit_autocomplete_v2.json',
-        );
-        url.searchParams.append('query', query);
-        return fetch(url.toString())
-            .then((res) => res.json())
-            .then(json => {
-                results = json.data.children;
-            });
+    const goBack = () => {
+        pop();
     };
-
-	const handleSubmit = (e) => {
-        e.preventDefault();
-        push(`/search?q=${query}`);
-    };
-
-    const handleFocus = (e) => {
-        focus = e.type === 'focusin';
-    }
-
-    const handleInput = debounce(() => {
-        doSearch();
-    }, 500)
-
 </script>
 
 <header>
-    <Dropdown />
-	<form on:submit={handleSubmit} on:focusin={handleFocus} use:clickOutside on:clickoutside={handleFocus}>
-		<input placeholder="Search subreddit..." on:input={handleInput} bind:value={query} />
-		{#if Boolean(results.length && focus)}
-			<ul>
-				{#each results as { data } (data.id)}
-					<ListItem {data} />
-				{/each}
-			</ul>
-		{/if}
-	</form>
+    <nav>
+        {#if subreddit !== 'popular'}
+            <button on:click={goBack}>
+                <Icon type="arrowLeft" />
+            </button>
+        {:else}
+            <InteractiveLogo />
+        {/if}
+        <h2>{headerTitle}</h2>
+        <ThemeSettings />
+        <!-- <Search /> -->
+    </nav>
 </header>
 
 <style>
-	header {
-		@apply bg-default
-        flex
-        items-center
-        justify-between
-        top-0
-        sticky
-        p-md
-        border
-        border-t-0
-        z-50;
-	}
-	input {
-		@apply bg-subtle
-        p-sm
-        text-default
-        border-2
-        rounded-sm
-        outline-none
-        transition-all
-        duration-200;
-		max-width: 190px;
-	}
-	input:focus {
-		@apply outline-none
-        border-primary
-        ring-4
-        ring-primary
-        ring-opacity-30
-        bg-default;
-	}
-	input:hover {
-		@apply bg-default;
-	}
-	ul {
-		@apply absolute
-        -mt-xs
-        mx-sm
-        right-0
-        w-300
-        bg-default
-        top-full
-        rounded
-        overflow-hidden
-        outline-none
-        shadow-default
-        hidden;
-	}
-	header:focus-within ul {
-		@apply block;
-	}
+    nav {
+        @apply
+            bg-default
+            flex
+            items-center
+            justify-between
+            p-md;
+    }
+    header {
+        @apply
+            top-0
+            sticky
+            border-b
+            z-50;
+    }
+    h2 {
+        @apply whitespace-nowrap
+            overflow-ellipsis
+            font-bold
+            text-tall
+            overflow-hidden
+            w-full
+            ml-md;
+    }
 </style>

@@ -4,7 +4,7 @@
     import { loc } from 'svelte-spa-router';
     import Spinner from '../components/Spinner.svelte';
     import Post from '../components/Post/index.svelte';
-    import SortFilter from '../components/SortFilter.svelte';
+    import SortFilter from '../components/SortFilter/index.svelte';
     import { fetchPageData } from '../requests';
 
     $: location = $loc.location + '?' + $loc.querystring;

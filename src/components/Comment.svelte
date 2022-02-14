@@ -65,8 +65,7 @@
 		@apply
 			absolute
 			inset-0
-			w-full
-			z-10;
+			w-full;
 	}
 	div.text-container {
 		@apply flex-1 overflow-hidden;

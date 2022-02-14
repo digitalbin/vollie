@@ -110,7 +110,12 @@ on:change={onInView}
 
 <style>
     div.player-wrapper {
-        @apply rounded overflow-hidden bg-subtle mx-auto w-fit relative z-10;
+        @apply
+            rounded
+            overflow-hidden
+            bg-subtle
+            mx-auto
+            w-fit;
     }
 
     :global(.video-js .vjs-play-progress) {

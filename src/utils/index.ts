@@ -35,3 +35,33 @@ export function parseQuerystring(str: string): { [key: string]: string } {
   }, {});
   return queryObj;
 }
+
+export function prefersDark() {
+  return window.matchMedia('(prefers-color-scheme: dark)').matches;
+}
+
+class LocalStorage {
+  get(key, val) {
+    try {
+      return localStorage.getItem(key);
+    } catch (err) {
+      console.log('Can\'t access localStorage');
+    }
+  }
+  set(key, val) {
+    try {
+      localStorage.setItem(key, val);
+    } catch (err) {
+      console.log('Can\'t access localStorage');
+    }
+  }
+  delete(key, val) {
+    try {
+      localStorage.removeItem(key);
+    } catch (err) {
+      console.log('Can\'t access localStorage');
+    }
+  }
+}
+
+export const LS = new LocalStorage();

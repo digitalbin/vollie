@@ -20,21 +20,25 @@
 
 {#if $res.isLoading}
     <Spinner />
+{:else if $res.isSuccess}
+	{#if post}
+		<section in:fade>
+			<Post data={post} />
+		</section>
+	{/if}
+
+	<div>
+		{#each comments as { data } (data.id)}
+			<ul in:fade>
+				<Comment data={data} isLast={true} />
+			</ul>
+		{/each}
+	</div>
+
+{:else}
+	<p>Error i datan!!</p>
 {/if}
 
-{#if post}
-    <section in:fade>
-        <Post data={post} />
-    </section>
-{/if}
-
-<div>
-	{#each comments as { data } (data.id)}
-		<ul in:fade>
-			<Comment data={data} isLast={true} />
-		</ul>
-	{/each}
-</div>
 
 <style>
 	section {
