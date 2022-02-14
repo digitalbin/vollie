@@ -2,15 +2,22 @@
     import { location } from 'svelte-spa-router';
     import Icon from './Icon.svelte';
 
-    export let title;
+    export let data;
+
+    const {
+        title,
+        permalink
+    } = data;
 
     const share = () => {
         console.log(navigator)
+        const url = `${$location}#${permalink}`;
+        console.log(url);
         navigator
             .share({
                 title: 'Vollie',
                 text: title,
-                url: $location,
+                url,
             })
             .then(() => console.log('Successful share'))
             .catch((error) => console.log('Error sharing', error));

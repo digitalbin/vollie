@@ -6,6 +6,9 @@ import { svelte } from '@sveltejs/vite-plugin-svelte';
 const base = './'
 // https://vitejs.dev/config/
 export default defineConfig({
+    // server: {
+    //     https: true,
+    // },
     base: base,
     plugins: [
         svelte(),

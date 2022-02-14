@@ -14,7 +14,7 @@
         <span class="link-ish">{num_comments} comments</span>
         {upvotes} upvotes
     </a>
-    <Share {title} />
+    <Share {data} />
 </div>
 
 <style>
