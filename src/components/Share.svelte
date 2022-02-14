@@ -10,8 +10,8 @@
     } = data;
 
     const share = () => {
-        console.log(navigator)
-        const url = `${$location}#${permalink}`;
+        const [path] = window.location.href.split('#');
+        const url = `${path}#${permalink}`;
         console.log(url);
         navigator
             .share({
@@ -24,12 +24,12 @@
     }
 </script>
 
-<!-- {#if Boolean(navigator?.share)} -->
+{#if Boolean(navigator?.share)}
     <button on:click={share}>
         <Icon type="share" />
         Share
     </button>
-<!-- {/if} -->
+{/if}
 
 <style>
     button {
