@@ -1,23 +1,27 @@
 <script>
-	import { link } from 'svelte-spa-router';
-	import { kFormatter } from '../../utils';
+    import { link } from 'svelte-spa-router';
+    import Share from '../Share.svelte';
+    import { kFormatter } from '../../utils';
 
-	export let ups;
-	export let num_comments;
-	export let permalink;
-	const upvotes = kFormatter(ups);
+    export let data;
+    const { ups, num_comments, permalink, title } = data;
+
+    const upvotes = kFormatter(ups);
 </script>
 
-<a href={permalink} use:link>
-	<span class="link-ish">{num_comments} comments</span>
-	{upvotes} upvotes
-</a>
+<div>
+    <a href={permalink} use:link>
+        <span class="link-ish">{num_comments} comments</span>
+        {upvotes} upvotes
+    </a>
+    <Share {title} />
+</div>
 
 <style>
-	a {
-		@apply text-subtle text-tiny mt-md block;
-	}
-	span {
-		@apply mr-sm;
-	}
+    div {
+        @apply text-subtle text-default mt-md flex justify-between;
+    }
+    span {
+        @apply mr-sm;
+    }
 </style>
