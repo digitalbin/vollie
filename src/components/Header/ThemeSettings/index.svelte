@@ -5,7 +5,7 @@
     import { LS, prefersDark } from '../../../utils';
     import Switch from './Switch.svelte';
     import Icon from '../../Icon.svelte';
-    import Backdrop from '../../Backdrop.svelte';
+    import BackDrop from '../../BackDrop.svelte';
 
     let isOpen = false;
     let selection = LS.get('theme') || 'system';
@@ -40,7 +40,7 @@
 </button>
 
 {#if isOpen}
-    <Backdrop on:click={toggleOpen} />
+    <BackDrop on:click={toggleOpen} />
     <div transition:fly={{ y: -100, opacity: 1 }}>
         <span>Theme</span>
         <Switch bind:selection />
