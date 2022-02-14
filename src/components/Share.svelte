@@ -1,5 +1,4 @@
 <script>
-    import { location } from 'svelte-spa-router';
     import Icon from './Icon.svelte';
 
     export let data;
@@ -12,7 +11,7 @@
     const share = () => {
         const [path] = window.location.href.split('#');
         const url = `${path}#${permalink}`;
-        console.log(url);
+
         navigator
             .share({
                 title: 'Vollie',
