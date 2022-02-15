@@ -12,6 +12,7 @@ module.exports = {
 			xl: '30px',
 			xxl: '35px',
 			//larger explicit values 👇
+			40: '40px',
 			90: '90px',
 			160: '160px',
 			300: '300px',

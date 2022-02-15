@@ -1,32 +1,39 @@
 <script>
-    import debounce from 'just-debounce-it';
+    let y = 0;
 
-    let active = false;
-    let down = true;
-    let prev = 0;
+    // const oscillate = (input, min, max) => {
+    //     const range = max - min;
+    //     return min + Math.abs(((input + range) % (range * 2)) - range);
+    // };
 
-    const scrollEnd = debounce(() => { active = false }, 200);
-    const scrollStart = debounce(() => {
-        active = true;
-        scrollEnd();
-    }, 200);
-    
-    const scrolling = (e) => {
-        down = window.scrollY > prev ? true : false;
-        active = true;
-        scrollEnd();
-        prev = window.scrollY;
+    const oscillate = (input, min, max) => {
+        return (input % max) + min
+    };
+
+    import { tweened } from 'svelte/motion';
+	// import { sineInOut } from 'svelte/easing';
+	const osc = tweened(0, {
+        // easing: sineInOut
+    });
+	const rot = tweened(0, {
+        // easing: sineInOut
+    });
+
+    $: {
+        if (y) {
+            $osc = oscillate(y / 10, -25, 95);
+            $rot = y / 10;
+        } else {
+            $osc = 0;
+            $rot = 0;
+        }
     }
 </script>
 
-<svelte:window on:scroll={scrolling} />
-<svg
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 50 50"
-    class:active
-    class:down
->
+<svelte:window bind:scrollY={y} />
+
+
+<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
     <mask
         id="a"
         style="mask-type:alpha"
@@ -55,13 +62,14 @@
             width="50"
             height="50"
         >
-            <g id="ball">
+            <g id="ball" style:transform="rotate({$rot}deg)">
                 <path
                     id="line"
                     d="M-20.0005 22.5745C-20.0005 9.64684-13.2847 5-5.00049 5c8.2842 0 15 4.64684 15 17.5745m29.99999 0C39.9995 9.64684 46.7153 5 54.9995 5s15 4.64684 15 17.5745m-30-.1491c0 12.9278-6.7158 17.5746-15 17.5746S9.99951 35.3532 9.99951 22.4254m-30.00001 0c0 12.9278-6.7158 17.5746-15 17.5746-8.2843 0-15-4.6468-15-17.5746"
                     stroke="#fff"
                     stroke-width="4"
-                />
+                    style:transform="translateX({$osc}%)"
+                    />
             </g>
         </mask>
         <g mask="url(#c)">
@@ -104,44 +112,13 @@
 </svg>
 
 <style>
+
     svg {
         @apply w-xl h-xl flex-shrink-0;
     }
-    :root {
-        --dur: 1s;
-    }
-    #line {
-        /* animation: anim var(--dur) ease-in-out alternate infinite; */
-        animation: anim var(--dur) linear infinite;
-        animation-play-state: paused;
-        animation-direction: reverse;
-    }
-    @keyframes anim {
-        from {
-            transform: translateX(-25%);
-        }
 
-        to {
-            transform: translateX(95%);
-        }
-    }
-   #ball {
+    #ball {
         transform-origin: 50% 50%;
-        animation: rot var(--dur) linear infinite;
-        animation-play-state: paused;
-        animation-direction: reverse;
-    }
-    @keyframes rot {
-        to {
-            transform: rotate(360deg);
-        }
     }
 
-    .active #line, .active #ball {
-        animation-play-state: running;
-    }
-
-    .down #line, .down #ball {
-        animation-direction: normal;
-    }
 </style>

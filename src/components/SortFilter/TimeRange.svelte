@@ -32,7 +32,7 @@
 
 <button on:click={toggleMenu}>
     {sortMap[time]}
-    <Icon type="angleDown" />
+    <Icon type="angleDown" size={15} />
 </button>
 <ActionSheet bind:isOpen>
     <form transition:fly={{ y: 432, opacity: 1 }} on:change={onChange}>
@@ -67,8 +67,6 @@
             rounded-t-lg
             p-lg
             fixed;
-            /* ZINDEX */
-            /* z-50; */
     }
     span {
         @apply text-tall font-bold mb-xl;

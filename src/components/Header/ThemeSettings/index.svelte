@@ -49,6 +49,9 @@
 
 
 <style>
+    button {
+        @apply p-xs;
+    }
     div {
         @apply absolute
             left-0

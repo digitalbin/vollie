@@ -1,5 +1,6 @@
 <script>
 	import {link} from 'svelte-spa-router'
+	import Icon from '../Icon.svelte';
     import { kFormatter } from '../../utils/index';
 	export let data;
 	const {
@@ -23,13 +24,16 @@
             {:else}
                 <span />
             {/if}
-			<div>
-				<h3>
-					{display_name_prefixed}
-				</h3>
-				<p>
-                    {kFormatter(subscribers)} members
-                </p>
+			<div class="info">
+				<div class="text">
+					<h3>
+						{display_name_prefixed}
+					</h3>
+					<p>
+						{kFormatter(subscribers)} members
+					</p>
+				</div>
+				<Icon type="angleRight" size={15} />
 			</div>
 		</a>
 	</li>
@@ -38,8 +42,7 @@
 <style>
 	a {
 		@apply transition-all
-        py-sm
-        px-md
+        pt-lg
         outline-none
         flex;
 	}
@@ -65,11 +68,11 @@
 	}
 
     img {
-        @apply mr-sm w-lg h-lg rounded-full overflow-hidden flex-none;
+        @apply mr-md w-40 h-40 rounded-full overflow-hidden flex-none;
     }
 
     span {
-        @apply mr-sm w-lg h-lg bg-subtle rounded-full flex-none;
+        @apply mr-md w-40 h-40 bg-subtle rounded-full flex-none;
     }
     h3 {
         @apply text-default;
@@ -77,4 +80,7 @@
     p {
         @apply text-tiny text-subtle font-regular;
     }
+	div.info {
+		@apply border-b flex-1 pb-lg flex justify-between items-center;
+	}
 </style>

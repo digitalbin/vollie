@@ -1,12 +1,12 @@
 <script>
     import debounce from 'just-debounce-it';
     import { push } from 'svelte-spa-router';
-    import clickOutside from '../../utils/clickOutside';
+    import { fly } from 'svelte/transition';
     import ListItem from './ListItem.svelte';
+    import Icon from '../Icon.svelte';
 
     let query = '';
     let results = [];
-    let focus;
 
     const doSearch = () => {
         const url = new URL(
@@ -25,73 +25,67 @@
         push(`/search?q=${query}`);
     };
 
-    const handleFocus = (e) => {
-        focus = e.type === 'focusin';
-    };
-
     const handleInput = debounce(() => {
         doSearch();
     }, 500);
+
+    let isOpen = false;
+
+    const toggleOpen = () => {
+        isOpen = !isOpen;
+    };
+
+    const autoFocus = (el) => el.focus();
+    let w;
 </script>
 
-<form
-    on:submit={handleSubmit}
-    on:focusin={handleFocus}
-    use:clickOutside
-    on:clickoutside={handleFocus}
->
-    <input
-        placeholder="Search subreddit..."
-        on:input={handleInput}
-        bind:value={query}
-    />
-    {#if Boolean(results.length && focus)}
-        <ul>
-            {#each results as { data } (data.id)}
-                <ListItem {data} />
-            {/each}
-        </ul>
-    {/if}
-</form>
+<button class="p-xs" on:click={toggleOpen}>
+    <Icon type="search" />
+</button>
+
+{#if isOpen}
+    <div class="wrapper" transition:fly={{ x: w, opacity: 1 }} bind:clientWidth={w}>
+        <form on:submit={handleSubmit}>
+            <label>
+                <Icon
+                    class="absolute left-sm -translate-y-1/2 top-1/2"
+                    type="search"
+                />
+                <input on:input={handleInput} bind:value={query} use:autoFocus />
+            </label>
+            <button class="text-tiny font-bold" on:click={toggleOpen}>
+                Cancel
+            </button>
+        </form>
+            <h3 class="text-tall font-bold mt-lg ml-md">Subreddits</h3>
+            <ul>
+                {#each results as { data } (data.id)}
+                    <ListItem {data} />
+                {/each}
+            </ul>
+    </div>
+{/if}
 
 <style>
+    div.wrapper {
+        @apply absolute inset-0 h-screen bg-default flex flex-col;
+    }
+    form {
+        @apply flex justify-between items-center p-md gap-sm border-b;
+    }
+    label {
+        @apply relative flex-1;
+    }
     input {
-        @apply bg-subtle
-        p-sm
-        text-default
-        border-2
-        rounded-sm
-        outline-none
-        transition-all
-        duration-200;
-        max-width: 190px;
+        @apply border-2 rounded-sm w-full;
+        padding: 8px 10px 8px 40px;
     }
-    input:focus {
-        @apply outline-none
-        border-primary
-        ring-4
-        ring-primary
-        ring-opacity-30
-        bg-default;
-    }
-    input:hover {
-        @apply bg-default;
+    input:focus,
+    input:active,
+    input:focus-visible {
+        @apply border-primary outline-none ring ring-offset-0 ring-primary ring-opacity-30;
     }
     ul {
-        @apply absolute
-        -mt-xs
-        mx-sm
-        right-0
-        w-300
-        bg-default
-        top-full
-        rounded
-        overflow-hidden
-        outline-none
-        shadow-default
-        hidden;
-    }
-    header:focus-within ul {
-        @apply block;
+        @apply p-md;
     }
 </style>
