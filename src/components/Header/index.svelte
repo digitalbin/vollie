@@ -1,7 +1,7 @@
 <script>
     import { params, location, pop } from 'svelte-spa-router';
     import ThemeSettings from './ThemeSettings/index.svelte';
-    import Search from './Search.svelte';
+    import Search from './Search/index.svelte';
     import InteractiveLogo from './InteractiveLogoControlled.svelte';
     import Icon from '../Icon.svelte';
 

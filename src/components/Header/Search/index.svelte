@@ -1,12 +1,13 @@
 <script>
     import debounce from 'just-debounce-it';
-    import { push } from 'svelte-spa-router';
+    import { push, location } from 'svelte-spa-router';
     import { fly } from 'svelte/transition';
     import ListItem from './ListItem.svelte';
-    import Icon from '../Icon.svelte';
+    import Icon from '../../Icon.svelte';
 
     let query = '';
     let results = [];
+    let w;
 
     const doSearch = () => {
         const url = new URL(
@@ -36,7 +37,11 @@
     };
 
     const autoFocus = (el) => el.focus();
-    let w;
+
+    location.subscribe(() => {
+        isOpen = false;
+    });
+
 </script>
 
 <button class="p-xs" on:click={toggleOpen}>
@@ -44,31 +49,43 @@
 </button>
 
 {#if isOpen}
-    <div class="wrapper" transition:fly={{ x: w, opacity: 1 }} bind:clientWidth={w}>
+    <div
+        class="wrapper"
+        transition:fly={{ x: w, opacity: 1 }}
+        bind:clientWidth={w}
+    >
         <form on:submit={handleSubmit}>
             <label>
                 <Icon
                     class="absolute left-sm -translate-y-1/2 top-1/2"
                     type="search"
                 />
-                <input on:input={handleInput} bind:value={query} use:autoFocus />
+                <input
+                    on:input={handleInput}
+                    bind:value={query}
+                    use:autoFocus
+                />
             </label>
-            <button class="text-tiny font-bold" on:click={toggleOpen}>
+            <button
+                type="button"
+                class="text-tiny font-bold"
+                on:click={toggleOpen}
+            >
                 Cancel
             </button>
         </form>
-            <h3 class="text-tall font-bold mt-lg ml-md">Subreddits</h3>
-            <ul>
-                {#each results as { data } (data.id)}
-                    <ListItem {data} />
-                {/each}
-            </ul>
+        <h3 class="text-tall font-bold mt-lg ml-md">Subreddits</h3>
+        <ul>
+            {#each results as { data } (data.id)}
+                <ListItem {data} />
+            {/each}
+        </ul>
     </div>
 {/if}
 
 <style>
     div.wrapper {
-        @apply absolute inset-0 h-screen bg-default flex flex-col;
+        @apply absolute inset-0 h-screen bg-default flex flex-col text-default;
     }
     form {
         @apply flex justify-between items-center p-md gap-sm border-b;
@@ -77,8 +94,9 @@
         @apply relative flex-1;
     }
     input {
-        @apply border-2 rounded-sm w-full;
+        @apply border-2 rounded-sm w-full bg-default;
         padding: 8px 10px 8px 40px;
+        font-size: 16px;
     }
     input:focus,
     input:active,

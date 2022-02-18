@@ -1,7 +1,7 @@
 <script>
     import debounce from 'just-debounce-it';
     import { push } from 'svelte-spa-router';
-    import clickOutside from '../../utils/clickOutside';
+    import clickOutside from '../../../utils/clickOutside';
     import ListItem from './ListItem.svelte';
 
     let query = '';

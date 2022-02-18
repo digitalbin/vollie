@@ -15,12 +15,13 @@
     }
 
     let isOpen = false;
+    let time = 'day';
+    let h;
 
     const toggleMenu = () => {
         isOpen = !isOpen;
     }
 
-    let time = 'day';
 
     const onChange = () => {
         const querystring = time === 'day' ? $location : `${$location}?t=${time}`
@@ -35,7 +36,7 @@
     <Icon type="angleDown" size={15} />
 </button>
 <ActionSheet bind:isOpen>
-    <form transition:fly={{ y: 432, opacity: 1 }} on:change={onChange}>
+    <form bind:clientHeight={h} transition:fly={{ y: h, opacity: 1 }} on:change={onChange}>
         <span>Sort by</span>
         {#each Object.entries(sortMap) as [value, label] (value)}
             <Radio bind:group={time} value={value}>{label}</Radio>

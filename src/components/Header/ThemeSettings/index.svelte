@@ -9,6 +9,7 @@
 
     let isOpen = false;
     let selection = LS.get('theme') || 'system';
+    let h;
 
     const toggleOpen = () => {
         isOpen = !isOpen;
@@ -41,7 +42,7 @@
 
 {#if isOpen}
     <BackDrop on:click={toggleOpen} />
-    <div transition:fly={{ y: -100, opacity: 1 }}>
+    <div bind:clientHeight={h} transition:fly={{ y: -h, opacity: 1 }}>
         <span>Theme</span>
         <Switch bind:selection />
     </div>
