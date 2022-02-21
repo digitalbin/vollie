@@ -94,14 +94,12 @@
         @apply relative flex-1;
     }
     input {
-        @apply border-2 rounded-sm w-full bg-default;
+        @apply border-2 rounded-sm w-full bg-default outline-none;
         padding: 8px 10px 8px 40px;
         font-size: 16px;
     }
-    input:focus,
-    input:active,
-    input:focus-visible {
-        @apply border-primary outline-none ring ring-offset-0 ring-primary ring-opacity-30;
+    input:focus {
+        @apply border-primary ring ring-offset-0 ring-primary ring-opacity-30;
     }
     ul {
         @apply p-md;

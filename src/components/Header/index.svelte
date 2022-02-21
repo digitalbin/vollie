@@ -15,7 +15,7 @@
 
 <header>
     <nav>
-        {#if subreddit !== 'popular'}
+        {#if subreddit !== 'popular' || $location === '/search'}
             <button on:click={goBack}>
                 <Icon type="arrowLeft" />
             </button>

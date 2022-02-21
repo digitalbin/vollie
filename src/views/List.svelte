@@ -14,8 +14,9 @@
         queryFn: ({ pageParam }) =>
             fetchPageData(location, { after: pageParam }),
         getNextPageParam: (prev) => prev?.data?.after,
+        retry: false,
         // cacheTime: Infinity,
-		// staleTime: Infinity,
+        // staleTime: Infinity,
     };
 
     const res = useInfiniteQuery(queryOpts);
@@ -25,9 +26,7 @@
     };
 
     $: res.setOptions({ ...queryOpts, queryKey: location });
-
 </script>
-
 
 <SortFilter />
 

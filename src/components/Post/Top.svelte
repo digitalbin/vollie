@@ -7,7 +7,7 @@
     export let data;
     const { title, subreddit, permalink, created, author } = data;
 
-    const isPost = Boolean($params?.wild);
+    $: isPost = Boolean($params?.wild);
     const decodedTitle = he.decode(title);
     const uuser = `u/${author}`;
     const rsubreddit = `r/${subreddit}`;

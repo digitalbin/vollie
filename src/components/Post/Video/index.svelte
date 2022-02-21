@@ -115,6 +115,8 @@ on:change={onInView}
             overflow-hidden
             bg-subtle
             mx-auto
+            relative
+            z-10
             w-fit;
     }
 
